@@ -157,7 +157,7 @@ public class SetAlarm extends PreferenceActivity
 
         // The last thing we do is pop the time picker if this is a new alarm.
         if (mId == -1) {
-            // Assume the Appuser hit cancel
+            // Assume the AppUser hit cancel
             mTimePickerCancelled = true;
             showTimePicker();
         }
@@ -209,7 +209,7 @@ public class SetAlarm extends PreferenceActivity
     public void onBackPressed() {
         // In the usual case of viewing an alarm, mTimePickerCancelled is
         // initialized to false. When creating a new alarm, this value is
-        // assumed true until the Appuser changes the time.
+        // assumed true until the AppUser changes the time.
         if (!mTimePickerCancelled) {
             saveAlarm();
         }
@@ -222,7 +222,7 @@ public class SetAlarm extends PreferenceActivity
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // onTimeSet is called when the Appuser clicks "Set"
+        // onTimeSet is called when the AppUser clicks "Set"
         mTimePickerCancelled = false;
         mHour = hourOfDay;
         mMinutes = minute;
@@ -287,7 +287,7 @@ public class SetAlarm extends PreferenceActivity
     }
 
     /**
-     * Display a toast that tells the Appuser how long until the alarm
+     * Display a toast that tells the AppUser how long until the alarm
      * goes off.  This helps prevent "am/pm" mistakes.
      */
     static void popAlarmSetToast(Context context, int hour, int minute,

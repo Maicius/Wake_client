@@ -158,6 +158,10 @@
             android:name="com.maicius.wake.InterChange.UserInfo"
             android:label="个人信息" >
         </activity>
+        <activity
+            android:name="com.maicius.wake.InterChange.SleepHistory"
+            android:label="睡眠时间" >
+        </activity>
 
         <activity
             android:name="com.mob.tools.MobUIShell"

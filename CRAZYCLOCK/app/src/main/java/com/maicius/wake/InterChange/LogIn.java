@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.maicius.wake.DBmanager.Appuser;
+import com.maicius.wake.DBmanager.AppUser;
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
@@ -99,15 +99,15 @@ public class LogIn extends Activity {
                         String info_success = st.nextToken();
                         String info_nickname = st.nextToken();
                         if (info_success.equals("success")) {
-                            Log.v("sss", "start Appuser space!");
+                            Log.v("sss", "start AppUser space!");
                             /*更新Mainactivity的用户名和昵称，同时将登陆信息保存到本地Sqlite数据库*/
-                            Appuser user = new Appuser();
                             DBManager dbManager = new DBManager(LogIn.this);
                             MainActivity.s_nickname = info_nickname;
                             MainActivity.s_userName = username.getText().toString();
-                            user.sqlusername = MainActivity.s_userName;
-                            user.sqlnickname = MainActivity.s_nickname;
-                            user.sqlpassword = password.getText().toString();
+                            AppUser user = new AppUser(
+                                    MainActivity.s_userName,
+                                    password.getText().toString(),
+                                    MainActivity.s_nickname);
                             dbManager.updateAppUser(user);
                             MainActivity.s_isLogged = true;
                             startActivity(new Intent(LogIn.this, UserSpace.class));

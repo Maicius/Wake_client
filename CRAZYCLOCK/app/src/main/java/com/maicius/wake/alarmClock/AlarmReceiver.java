@@ -101,7 +101,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Trigger a notification that, when clicked, will show the alarm alert
         // dialog. No need to check for fullscreen since this will always be
-        // launched from a Appuser action.
+        // launched from a AppUser action.
         Intent notify = new Intent(context, AlarmAlert.class);
         notify.putExtra(Alarms.ALARM_INTENT_EXTRA, alarm);
         PendingIntent pendingNotify = PendingIntent.getActivity(context,

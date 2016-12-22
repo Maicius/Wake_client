@@ -103,7 +103,7 @@ public class AlarmKlaxon extends Service {
     private PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         @Override
         public void onCallStateChanged(int state, String ignored) {
-            // The Appuser might already be in a call when the alarm fires. When
+            // The AppUser might already be in a call when the alarm fires. When
             // we register onCallStateChanged, we get the initial in-call state
             // which kills the alarm. Check against the initial call state so
             // we don't kill the alarm during a call.
@@ -315,7 +315,7 @@ public class AlarmKlaxon extends Service {
      * won't run all day.
      *
      * This just cancels the audio, but leaves the notification
-     * popped, so the Appuser will know that the alarm tripped.
+     * popped, so the AppUser will know that the alarm tripped.
      */
     private void enableKiller(Alarm alarm) {
         mHandler.sendMessageDelayed(mHandler.obtainMessage(KILLER, alarm),

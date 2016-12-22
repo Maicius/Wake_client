@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/login_div"
         android:layout_width="fill_parent"
-        android:layout_height="337dp"
+        android:layout_height="314dp"
         android:padding="15dip"
         android:layout_margin="15dip"
         android:background="@drawable/background_login_div_bg" >
@@ -62,7 +62,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/register_nickname_hint"
-            android:singleLine="true"
             android:layout_below="@+id/register_nickname_text"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -91,11 +90,10 @@
             android:layout_height="match_parent"
             android:background="#4cc05f"
             android:layout_below="@id/register_ver_code"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:text="@string/login_label_sign_up"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentEnd="true" />
 
 
 
