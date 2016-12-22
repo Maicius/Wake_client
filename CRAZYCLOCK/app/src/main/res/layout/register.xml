@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/ic_background">
+    <!-- padding 内边距   layout_margin 外边距  
+        android:layout_alignParentTop 布局的位置是否处于顶部 -->
+
+    <RelativeLayout
+        android:id="@+id/login_div"
+        android:layout_width="fill_parent"
+        android:layout_height="337dp"
+        android:padding="15dip"
+        android:layout_margin="15dip"
+        android:background="@drawable/background_login_div_bg" >
+        <!-- 账号 -->
+        <TextView
+            android:id="@+id/login_user_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/register_account"/>
+
+        <EditText
+            android:id="@+id/register_username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_hint"
+            android:layout_below="@id/login_user_input"
+            android:singleLine="true"
+            android:inputType="text"/>
+        <!-- 密码 text -->
+        <TextView
+            android:id="@+id/register_password_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in_password"
+            android:layout_below="@id/register_username"/>
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_password_hint"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:layout_below="@+id/register_password_text"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <!-- 用户名 text -->
+        <TextView
+            android:id="@+id/register_nickname_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_nick_name"
+            android:layout_below="@+id/register_password"/>
+
+        <EditText
+            android:id="@+id/register_nickname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/register_nickname_hint"
+            android:singleLine="true"
+            android:layout_below="@+id/register_nickname_text"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <!-- 验证码  -->
+        <EditText
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ver_code_text"
+            android:hint="@string/ver_code_text"
+            android:layout_alignTop="@+id/register_ver_code"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_ver_code"
+            android:id="@+id/register_ver_code"
+            android:layout_below="@+id/register_nickname"
+            android:layout_alignRight="@+id/sign_up_button"
+            android:layout_alignEnd="@+id/sign_up_button" />
+        <!-- 登录button -->
+        <Button
+            android:id="@+id/sign_up_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#4cc05f"
+            android:layout_below="@id/register_ver_code"
+            android:textSize="15dp"
+            android:text="@string/login_label_sign_up"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <TextView  android:id="@+id/login"
+            android:text="@string/register_login_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textColor="#888"
+            android:textColorLink="#FF0066CC" />
+        <ImageView android:id="@+id/miniTwitter_logo"
+            android:src="@drawable/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp" />
+    </RelativeLayout>
+</LinearLayout>  

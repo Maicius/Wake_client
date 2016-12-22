@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/ic_background">
+    <!-- padding 内边距   layout_margin 外边距  
+        android:layout_alignParentTop 布局的位置是否处于顶部 -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="55dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="我的空间"
+            android:id="@+id/userspace_name"
+            android:textSize="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical|center_horizontal" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/getUpTime"
+            android:src="@drawable/ic_clock_strip_desk_clock"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="86dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="起床记录"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="140dp"
+            android:id="@+id/getUpTime"
+            android:layout_gravity="center" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userInfo"
+            android:src="@drawable/btn_login"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="68dp"
+            android:layout_marginStart="190dp"
+            android:layout_gravity="right" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="个人信息"
+
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginStart="190dp"
+            android:id="@+id/textView2"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/exit"
+            android:src="@drawable/exit"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="68dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="退出登录"
+            android:id="@+id/textView3"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="42dp"
+            android:layout_marginTop="140dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
