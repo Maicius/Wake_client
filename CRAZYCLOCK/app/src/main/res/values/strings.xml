@@ -2,6 +2,9 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <string name="default_nickname">"zz"</string>
+    <string name="default_phonenumber">"13540472526"</string>
+    <string name="default_signiture">"主人很懒，什么都没写哦"</string>
     <string name="hello">Hello World, ClockMainActivity!</string>
     <string name="app_name">WAKE</string>
     <string name="label">"标签"</string>

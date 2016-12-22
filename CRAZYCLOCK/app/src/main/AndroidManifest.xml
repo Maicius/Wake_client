@@ -164,6 +164,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name="com.maicius.wake.InterChange.FriendsList"
+            android:label="我的好友"></activity>
     </application>
 
 </manifest>
