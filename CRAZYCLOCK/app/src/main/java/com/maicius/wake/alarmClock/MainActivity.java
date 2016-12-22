@@ -32,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.maicius.wake.DBmanager.Appuser;
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.InterChange.LogIn;
 import com.maicius.wake.InterChange.UserSpace;

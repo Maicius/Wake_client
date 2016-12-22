@@ -46,14 +46,14 @@ public class Alarms {
     // show the alarm has been killed.
     public static final String ALARM_KILLED = "alarm_killed";
 
-    // Extra in the ALARM_KILLED intent to indicate to the Appuser how long the
+    // Extra in the ALARM_KILLED intent to indicate to the AppUser how long the
     // alarm played before being killed.
     public static final String ALARM_KILLED_TIMEOUT = "alarm_killed_timeout";
 
     // This string is used to indicate a silent alarm in the db.
     public static final String ALARM_ALERT_SILENT = "silent";
 
-    // This intent is sent from the notification when the Appuser cancels the
+    // This intent is sent from the notification when the AppUser cancels the
     // snooze alert.
     public static final String CANCEL_SNOOZE = "cancel_snooze";
 
@@ -208,7 +208,7 @@ public class Alarms {
             disableSnoozeAlert(context, alarm.id);
 
             // Disable the snooze if this alarm fires before the snoozed alarm.
-            // This works on every alarm since the Appuser most likely intends to
+            // This works on every alarm since the AppUser most likely intends to
             // have the modified alarm fire next.
             clearSnoozeIfNeeded(context, timeInMillis);
         }
@@ -316,7 +316,7 @@ public class Alarms {
 
     /**
      * Called at system startup, on time/timezone change, and whenever
-     * the Appuser changes alarm settings.  Activates snooze if set,
+     * the AppUser changes alarm settings.  Activates snooze if set,
      * otherwise loads all alarms, activates next alert.
      */
     public static void setNextAlert(final Context context) {

@@ -45,7 +45,7 @@ public class AlarmAlert extends AlarmAlertFullScreen {
         super.onCreate(icicle);
 
         // Listen for the screen turning off so that when the screen comes back
-        // on, the Appuser does not need to unlock the phone to dismiss the alarm.
+        // on, the AppUser does not need to unlock the phone to dismiss the alarm.
         registerReceiver(mScreenOffReceiver,
                 new IntentFilter(Intent.ACTION_SCREEN_OFF));
     }

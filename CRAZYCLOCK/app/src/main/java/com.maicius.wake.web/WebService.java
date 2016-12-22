@@ -27,6 +27,7 @@ public class WebService extends Activity{
     }
     // IP地址
     private static String IP = "116.62.41.211:8080";
+    //private static String IP = "192.168.191.1:8080";
     ConnectionDetector connectionDetector;
     /**
      * DoGet
@@ -82,31 +83,31 @@ public class WebService extends Activity{
      */
     public static String executeHttpGet(String username, String password,
                                         String nickname, State state) {
-            String path;
-            //path = "http://" + IP + "HelloWeb/RegLet";
-            path = "http://" + IP + "/RegLet";
-            try {
-                path = path + "?username=" + username + "&password=" + password + "&nickname=" + URLEncoder.encode(nickname, "UTF-8");
-            }catch(UnsupportedEncodingException e){
-                e.printStackTrace();
-            }
-            return doHttpGet(path);
+        String path;
+        //path = "http://" + IP + "HelloWeb/RegLet";
+        path = "http://" + IP + "/RegLet";
+        try {
+            path = path + "?username=" + username + "&password=" + password + "&nickname=" + URLEncoder.encode(nickname, "UTF-8");
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+        return doHttpGet(path);
     }
     /**
      * 上传起床时间
      */
     public static String executeHttpGet(long date, State state) {
 
-            //String path = "http://" + IP + "HelloWeb/GetUpTime";
-            String path = "http://" + IP + "/GetUpTime";
-            path = path + "?username=" + MainActivity.s_userName + "&date=" + String.valueOf(date);
-            return doHttpGet(path);
+        //String path = "http://" + IP + "HelloWeb/GetUpTime";
+        String path = "http://" + IP + "/GetUpTime";
+        path = path + "?username=" + MainActivity.s_userName + "&date=" + String.valueOf(date);
+        return doHttpGet(path);
 
     }
 
     public static String executeHttpGet(String username, State state) {
 
-            // URL 地址
+        // URL 地址
         String path = "";
         switch (state) {
             case GetTimeList:
@@ -117,7 +118,7 @@ public class WebService extends Activity{
                 //path = "http://" + IP + "/HelloWeb/GetUserInfo";
                 path = "http://" + IP + "/GetUserInfo";
                 break;
-            }
+        }
         path = path + "?username=" + username;
         Log.v("sss", path);
         return doHttpGet(path);
