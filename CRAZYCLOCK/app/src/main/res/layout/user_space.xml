@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/ic_background">
-    <!-- padding 内边距   layout_margin 外边距  
+    <!-- padding 内边距   layout_margin 外边距
         android:layout_alignParentTop 布局的位置是否处于顶部 -->
 
     <RelativeLayout
@@ -103,6 +103,27 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="42dp"
             android:layout_marginTop="140dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_friends"
+            android:layout_below="@+id/getUpTime"
+            android:layout_alignLeft="@+id/getUpTime"
+            android:layout_alignStart="@+id/getUpTime"
+            android:layout_marginTop="44dp"
+            android:id="@+id/friendImageView"
+            android:layout_alignRight="@+id/getUpTime"
+            android:layout_alignEnd="@+id/getUpTime" />
+
+        <TextView
+            android:text="好友信息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/friendImageView"
+            android:layout_alignLeft="@+id/friendImageView"
+            android:layout_alignStart="@+id/friendImageView"
+            android:id="@+id/friendsTextView" />
 
     </RelativeLayout>
 
