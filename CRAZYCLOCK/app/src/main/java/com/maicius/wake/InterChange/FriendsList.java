@@ -43,26 +43,6 @@ public class FriendsList extends Activity {
         dialog.show();
 
         listItems = new ArrayList<Map<String, Object>>();
-//        Map<String, Object> listItem = new HashMap<String, Object>();
-//        listItem.put("portrait", R.drawable.ic_portrait);
-//        listItem.put("nickName", "Eric");
-//        listItem.put("phoneNum", 1595958422);
-//        listItem.put("signature", "Hi, I'm Eric");
-//        listItems.add(listItem);
-//
-//        Map<String, Object> listItem2 = new HashMap<String, Object>();
-//        listItem2.put("portrait", R.drawable.ic_portrait);
-//        listItem2.put("nickName", "Eric");
-//        listItem2.put("phoneNum", 1595958422);
-//        listItem2.put("signature", "Hi, I'm Eric");
-//        listItems.add(listItem2);
-//
-//        Map<String, Object> listItem3 = new HashMap<String, Object>();
-//        listItem3.put("portrait", R.drawable.ic_portrait);
-//        listItem3.put("nickName", "Eric");
-//        listItem3.put("phoneNum", 1595958422);
-//        listItem3.put("signature", "Hi, I'm Eric");
-//        listItems.add(listItem3);
 
         //创建一个新的线程，用来获取好友信息
         new Thread(new MyThread()).start();
@@ -73,8 +53,6 @@ public class FriendsList extends Activity {
         StringTokenizer st = new StringTokenizer(returnInfo, "#");
         int tokenNum = st.countTokens();
         //Toast.makeText(FriendsList.this, "" + tokenNum, Toast.LENGTH_SHORT).show();
-
-
         for (int i = 0; i < tokenNum / 3; i++)
         {
             String userName = st.nextToken();
