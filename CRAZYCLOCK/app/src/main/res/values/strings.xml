@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="default_nickname">"zz"</string>
     <string name="default_phonenumber">"13540472526"</string>
@@ -14,7 +13,7 @@
     <string name="desk_clock_button_description">"时钟显示"</string>
     <string name="default_label">"闹钟"</string>
     <string name="menu_desk_clock">"座钟"</string>
-    <string name="menu_edit_alarm" >"修改闹钟设置"</string>
+    <string name="menu_edit_alarm">"修改闹钟设置"</string>
     <string name="enable_alarm">"启用闹钟"</string>
     <string name="delete_alarm">"取消闹钟"</string>
     <string name="disable_alarm">"停用闹钟"</string>
@@ -56,20 +55,24 @@
     <string name="alarm_alert_alert_silenced">"闹钟响铃时间为 <xliff:g id="MINUTES">%d</xliff:g> 分钟"</string>
     <string name="alarm_notify_snooze_text">"已将闹钟设置为从现在起 <xliff:g id="TIME">%s</xliff:g>后再提醒。选中可以取消。"</string>
     <string name="alarm_alert_snooze_set">"暂停 <xliff:g id="MINUTES">%d</xliff:g> 分钟。"</string>
+<<<<<<< HEAD
       <!---AppUser information-->
+=======
+    <!---Appuser information-->
+>>>>>>> 6df97cc84d5e3d30df56c7b40f1e71485b39018a
     <string name="info_phone_text">手机号</string>
     <string name="info_nickname_text">昵称</string>
     <string name="info_brief_intro_text">个性签名</string>
     <string name="info_brief_intro_hint">快来设置你的个性签名吧</string>
     <string-array name="alarm_set">
-	    <item msgid="5163476010406761625">"已将此闹钟设置为从现在起不到 1 分钟后提醒。"</item>
-	    <item msgid="7110525731259629055">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g>后再提醒。"</item>
-	    <item msgid="7003982794086186185">"已将此闹钟设置为从现在起 <xliff:g id="HOURS">%2$s</xliff:g>后再提醒。"</item>
-	    <item msgid="7311021123230077742">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="HOURS">%2$s</xliff:g>后再提醒。"</item>
-	    <item msgid="8431715191823114872">"已将此闹钟设置为从现在起 <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
-	    <item msgid="3244151088673185428">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
-	    <item msgid="3663661342600168814">"已将此闹钟设置为从现在起 <xliff:g id="HOURS">%2$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
-	    <item msgid="7779544127785487304">"已将该闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="HOURS">%2$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+        <item msgid="5163476010406761625">"已将此闹钟设置为从现在起不到 1 分钟后提醒。"</item>
+        <item msgid="7110525731259629055">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g>后再提醒。"</item>
+        <item msgid="7003982794086186185">"已将此闹钟设置为从现在起 <xliff:g id="HOURS">%2$s</xliff:g>后再提醒。"</item>
+        <item msgid="7311021123230077742">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="HOURS">%2$s</xliff:g>后再提醒。"</item>
+        <item msgid="8431715191823114872">"已将此闹钟设置为从现在起 <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+        <item msgid="3244151088673185428">"已将此闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+        <item msgid="3663661342600168814">"已将此闹钟设置为从现在起 <xliff:g id="HOURS">%2$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
+        <item msgid="7779544127785487304">"已将该闹钟设置为从现在起 <xliff:g id="DAYS">%1$s</xliff:g> <xliff:g id="HOURS">%2$s</xliff:g> <xliff:g id="MINUTES">%3$s</xliff:g>后再提醒。"</item>
     </string-array>
     <string name="day">"1 天"</string>
     <string name="days">"<xliff:g id="DAYS">%s</xliff:g> 天"</string>
@@ -86,21 +89,21 @@
     <string name="alarm_in_silent_mode_title">"静音模式下闹钟响"</string>
     <string name="alarm_in_silent_mode_summary">"手机处于静音模式时，闹钟仍会响"</string>
     <string name="snooze_duration_title">"再响间隔"</string>
-  <string-array name="snooze_duration_entries">
-    <item msgid="8337408933053603125">"5 分钟"</item>
-    <item msgid="5294206441496024610">"10 分钟"</item>
-    <item msgid="2165904039211935470">"15 分钟"</item>
-    <item msgid="7248236967714374250">"20 分钟"</item>
-    <item msgid="738394723625179423">"25 分钟"</item>
-    <item msgid="1180222611308391616">"30 分钟"</item>
-  </string-array>
-  <string-array name="snooze_duration_values">
-    <item msgid="3655014754453084122">"5"</item>
-    <item msgid="8939029597449573449">"10"</item>
-    <item msgid="3922647341176353315">"15"</item>
-    <item msgid="5821804105985044459">"20"</item>
-    <item msgid="6048861883552402852">"25"</item>
-    <item msgid="2740866721232379791">"30"</item>
-  </string-array>
-  <string name="alarm_klaxon_service_desc">"在 Clock 中设置的闹钟铃声播放服务。"</string>
+    <string-array name="snooze_duration_entries">
+        <item msgid="8337408933053603125">"5 分钟"</item>
+        <item msgid="5294206441496024610">"10 分钟"</item>
+        <item msgid="2165904039211935470">"15 分钟"</item>
+        <item msgid="7248236967714374250">"20 分钟"</item>
+        <item msgid="738394723625179423">"25 分钟"</item>
+        <item msgid="1180222611308391616">"30 分钟"</item>
+    </string-array>
+    <string-array name="snooze_duration_values">
+        <item msgid="3655014754453084122">"5"</item>
+        <item msgid="8939029597449573449">"10"</item>
+        <item msgid="3922647341176353315">"15"</item>
+        <item msgid="5821804105985044459">"20"</item>
+        <item msgid="6048861883552402852">"25"</item>
+        <item msgid="2740866721232379791">"30"</item>
+    </string-array>
+    <string name="alarm_klaxon_service_desc">"在 Clock 中设置的闹钟铃声播放服务。"</string>
 </resources>

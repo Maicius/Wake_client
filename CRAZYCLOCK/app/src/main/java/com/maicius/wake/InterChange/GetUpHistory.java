@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -24,11 +25,15 @@ public class GetUpHistory extends Activity {
     private ArrayList<HashMap<String, Object>> m_items = new ArrayList<HashMap<String, Object>>();
     private static Handler m_handler = new Handler();
     private ProgressDialog m_proDialog;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_up_history);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
         mInitUI();
     }
@@ -71,7 +76,8 @@ public class GetUpHistory extends Activity {
     public class MyThread implements Runnable {
         @Override
         public void run() {
-            m_info = WebService.executeHttpGet(MainActivity.s_userName,WebService.State.GetTimeList);
+            //m_info = WebService.executeHttpGet(MainActivity.s_userName,WebService.State.GetTimeList);
+            m_info = WebService.executeHttpGet(username, WebService.State.GetTimeList);
             Log.v("sss", "login:" + m_info);
             m_handler.post(new Runnable() {
                 @Override

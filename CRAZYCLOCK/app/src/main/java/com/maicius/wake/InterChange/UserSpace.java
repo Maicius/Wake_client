@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
+import com.maicius.wake.DBmanager.*;
 
 public class UserSpace extends Activity {
 
@@ -43,14 +44,23 @@ public class UserSpace extends Activity {
         });
         image_getUpTime.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(UserSpace.this, GetUpHistory.class));
+                Intent intent = new Intent();
+                intent.setClass(UserSpace.this, GetUpHistory.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("username", MainActivity.s_userName);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
         image_exit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MainActivity.s_isLogged=false;
                 DBManager dbManager = new DBManager(UserSpace.this);
+<<<<<<< HEAD
                 dbManager.deleteAppUser();
+=======
+                dbManager.deleteAppuser();
+>>>>>>> 6df97cc84d5e3d30df56c7b40f1e71485b39018a
                 UserSpace.this.finish();
             }
         });
