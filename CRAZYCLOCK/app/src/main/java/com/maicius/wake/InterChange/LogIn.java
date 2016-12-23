@@ -17,11 +17,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maicius.wake.DBmanager.AppUser;
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
+import com.maicius.wake.web.ConnectionDetector;
 import com.maicius.wake.web.WebService;
 
 import java.util.StringTokenizer;
@@ -53,6 +55,7 @@ public class LogIn extends Activity {
                 Register();
             }
         });
+
         //点击登录
         SignIn.setOnClickListener(new View.OnClickListener() {
 
@@ -78,45 +81,52 @@ public class LogIn extends Activity {
     public class MyThread implements Runnable {
         @Override
         public void run() {
-            info = WebService.executeHttpGet(username.getText().toString(), password.getText().toString(), WebService.State.LogIn);
-            Log.v("sss", "login:" + info);
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    dialog.dismiss();
-                    if (info.equals("failed")) {
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(LogIn.this);
-                        alertDialog.setTitle("登陆信息").setMessage("登陆失败：用户名或密码错误！");
-                        alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+            ConnectionDetector connectionDetector = new ConnectionDetector(LogIn.this);
+            if (connectionDetector.getInternetConnect()) {
+                info = WebService.executeHttpGet(username.getText().toString(), password.getText().toString(), WebService.State.LogIn);
+                Log.v("sss", "login:" + info);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        if (info.equals("failed")) {
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(LogIn.this);
+                            alertDialog.setTitle("登陆信息").setMessage("登陆失败：用户名或密码错误！");
+                            alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        });
-                        alertDialog.create().show();
-                    } else {
-                        StringTokenizer st = new StringTokenizer(info, "#");
-                        String info_success = st.nextToken();
-                        String info_nickname = st.nextToken();
-                        if (info_success.equals("success")) {
-                            Log.v("sss", "start AppUser space!");
+                                }
+                            });
+                            alertDialog.create().show();
+                        } else {
+                            StringTokenizer st = new StringTokenizer(info, "#");
+                            String info_success = st.nextToken();
+                            String info_nickname = st.nextToken();
+                            if (info_success.equals("success")) {
+                                Log.v("sss", "start AppUser space!");
                             /*更新Mainactivity的用户名和昵称，同时将登陆信息保存到本地Sqlite数据库*/
-                            DBManager dbManager = new DBManager(LogIn.this);
-                            MainActivity.s_nickname = info_nickname;
-                            MainActivity.s_userName = username.getText().toString();
-                            AppUser user = new AppUser(
-                                    MainActivity.s_userName,
-                                    password.getText().toString(),
-                                    MainActivity.s_nickname);
-                            dbManager.updateAppUser(user);
-                            MainActivity.s_isLogged = true;
-                            startActivity(new Intent(LogIn.this, UserSpace.class));
-                            LogIn.this.finish();
-                        }
+                                DBManager dbManager = new DBManager(LogIn.this);
+                                MainActivity.s_nickname = info_nickname;
+                                MainActivity.s_userName = username.getText().toString();
+                                AppUser user = new AppUser(
+                                        MainActivity.s_userName,
+                                        password.getText().toString(),
+                                        MainActivity.s_nickname);
+                                dbManager.updateAppUser(user);
+                                MainActivity.s_isLogged = true;
+                                startActivity(new Intent(LogIn.this, UserSpace.class));
+                                LogIn.this.finish();
+                            }
 
+                        }
                     }
-                }
-            });
+                });
+            }else{
+                dialog.dismiss();
+                Toast toast = Toast.makeText(LogIn.this, "网络未连接", Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 

@@ -56,7 +56,7 @@ public class UserSpace extends Activity {
             public void onClick(View v) {
                 MainActivity.s_isLogged=false;
                 DBManager dbManager = new DBManager(UserSpace.this);
-                dbManager.deleteAppUser();
+                dbManager.deleteAppUser("sqlUser");
                 UserSpace.this.finish();
             }
         });

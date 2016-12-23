@@ -68,7 +68,7 @@ public class ScreenListener {
         context.registerReceiver(screenBroadcastReceiver, filter);
     }
 
-    private interface ScreenStateListener{
+    public interface ScreenStateListener{
         void onScreenOn();
         void onScreenOff();
         void onUserPresent();

@@ -123,7 +123,7 @@ public class WebService extends Activity{
                 break;
             case GetFriendsList:
                 path = "http://" + IP + "/HelloWeb/GetFriendsList";
-                //path = "http:// + IP + "/GetFriendsList";
+                //path = "http://" + IP + "/GetFriendsList";
                 break;
         }
         path = path + "?username=" + username;
