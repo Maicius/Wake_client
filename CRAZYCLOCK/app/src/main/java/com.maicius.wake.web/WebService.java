@@ -23,7 +23,8 @@ public class WebService extends Activity{
         Register,
         GetUpTime,
         GetTimeList,
-        GetUserInfo
+        GetUserInfo,
+        GetFriendsList
     }
     // IP地址
     //private static String IP = "116.62.41.211:8080";
@@ -117,6 +118,10 @@ public class WebService extends Activity{
             case GetUserInfo:
                 path = "http://" + IP + "/HelloWeb/GetUserInfo";
                 //path = "http://" + IP + "/GetUserInfo";
+                break;
+            case GetFriendsList:
+                path = "http://" + IP + "/HelloWeb/GetFriendsList";
+                //path = "http:// + IP + "/GetFriendsList";
                 break;
         }
         path = path + "?username=" + username;

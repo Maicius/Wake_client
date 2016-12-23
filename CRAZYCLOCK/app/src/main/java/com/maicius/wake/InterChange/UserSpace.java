@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
+import com.maicius.wake.DBmanager.*;
 
 public class UserSpace extends Activity {
 
@@ -48,6 +49,8 @@ public class UserSpace extends Activity {
         image_exit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MainActivity.s_isLogged=false;
+                DBManager dbManager = new DBManager(UserSpace.this);
+                dbManager.deleteAppuser();
                 UserSpace.this.finish();
             }
         });
