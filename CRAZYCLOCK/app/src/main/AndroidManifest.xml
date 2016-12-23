@@ -136,6 +136,8 @@
                 <action android:name="com.maicius.wake.alarmClock.ALARM_ALERT" />
             </intent-filter>
         </service>
+        <service
+            android:name="com.maicius.wake.InterChange.SyncDatabase"></service>
 
         <receiver android:name=".AlarmInitReceiver">
             <intent-filter>

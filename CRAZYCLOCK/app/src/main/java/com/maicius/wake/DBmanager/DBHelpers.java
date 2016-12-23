@@ -22,8 +22,6 @@ public class DBHelpers extends SQLiteOpenHelper {
                 "\tnickname varchar(255)\n" +
                 ")";
         db.execSQL(sql);
-        Cursor c = db.rawQuery("select * from sqlUser",null);
-        c.moveToFirst();
         sql = "create table sleepTime(\n" +
                 "\tsleep_time_id int,\n" +
                 "\tusername varchar(255),\n" +
@@ -32,8 +30,13 @@ public class DBHelpers extends SQLiteOpenHelper {
                 "\tforeign key(username) references sqlUser(username)\n" +
                 ")";
         db.execSQL(sql);
-        Cursor c2 = db.rawQuery("select * from sleepTime",null);
-        c2.moveToFirst();
+        sql = "create table getUpTime(\n" +
+                "\tget_up_time_id int primary key,\n" +
+                "\tusername varchar(255),\n" +
+                "\tget_up_time varchar(255),\n" +
+                "\tforeign key(username) references appuser(username)\n" +
+                ")";
+        db.execSQL(sql);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS sleepTime");

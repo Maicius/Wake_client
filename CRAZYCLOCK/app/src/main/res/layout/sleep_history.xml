@@ -8,12 +8,21 @@
     tools:context="com.maicius.wake.InterChange.SleepHistory"
     android:background="@drawable/ic_background2">
 
+    <Switch
+        android:text="睡眠记录"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:id="@+id/enable_record" />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sleep_history"
-        android:layout_alignParentLeft="false"
+        android:layout_below="@id/enable_record"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

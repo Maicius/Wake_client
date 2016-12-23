@@ -1,7 +1,17 @@
 package com.maicius.wake.InterChange;
+/**
+ * 记录睡眠长度
+ * 监测屏幕的广播信息，记录每次屏幕关闭的时间并存储在本地数据库里，
+ * 每当屏幕解锁后刷新该时间
+ * 并在有网络的情况下将该时间上传到云端数据库
+ */
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.DBmanager.SleepTimeUser;
@@ -17,13 +27,36 @@ import java.util.Date;
  */
 public class SleepHistory extends Activity {
     private DBManager dbManager;
+    private Switch enable_record;
+    ScreenListener screenListener;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sleep_history);
+        enable_record = (Switch)findViewById(R.id.enable_record);
+        dbManager = new DBManager(this);
+        screenListener = new ScreenListener(this);
+        enable_record.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    enableSleepTime();
+                }else{
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(SleepHistory.this);
+                    alertDialog.setTitle("提醒").setMessage("关闭后将不再记录您的睡眠信息");
+                    alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            disableSleepTime();
+                        }
+                    });
+                    alertDialog.create().show();
+                }
+            }
+        });
+
     }
     private void enableSleepTime(){
-        dbManager = new DBManager(this);
-        ScreenListener screenListener = new ScreenListener(this);
+
         screenListener.begin(new ScreenListener.ScreenStateListener() {
             @Override
             public void onScreenOn() {
@@ -46,6 +79,9 @@ public class SleepHistory extends Activity {
                 dbManager.deleteAppUser("sleepTime");
             }
         });
+    }
+    private void disableSleepTime(){
+        screenListener.unregisterListener();
     }
 
 }
