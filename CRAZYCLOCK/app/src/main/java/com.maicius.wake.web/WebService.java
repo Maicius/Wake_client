@@ -24,7 +24,9 @@ public class WebService extends Activity{
         GetUpTime,
         GetTimeList,
         GetUserInfo,
-        GetFriendsList
+        GetFriendsList,
+        DeleteFriend,
+        AddFriend
     }
     // IP地址
     //private static String IP = "116.62.41.211:8080";
@@ -126,6 +128,22 @@ public class WebService extends Activity{
         }
         path = path + "?username=" + username;
         Log.v("sss", path);
+        return doHttpGet(path);
+    }
+
+    public static String friendOperation(String userName, String friendName, State state) {
+        String path = "";
+        switch (state) {
+            case DeleteFriend:
+                path = "http://" + IP + "/HelloWeb/DeleteFriend";
+                //path = "http://" + IP + "/DeleteFriend";
+                break;
+            case AddFriend:
+                path = "http://" + IP + "/HelloWeb/AddFriend";
+                //path = "http://" + IP + "/AddFriend";
+                break;
+        }
+        path += "?userName=" + userName + "&friendName=" + friendName;
         return doHttpGet(path);
     }
 
