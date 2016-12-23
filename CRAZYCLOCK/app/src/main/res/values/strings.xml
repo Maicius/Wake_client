@@ -55,11 +55,7 @@
     <string name="alarm_alert_alert_silenced">"闹钟响铃时间为 <xliff:g id="MINUTES">%d</xliff:g> 分钟"</string>
     <string name="alarm_notify_snooze_text">"已将闹钟设置为从现在起 <xliff:g id="TIME">%s</xliff:g>后再提醒。选中可以取消。"</string>
     <string name="alarm_alert_snooze_set">"暂停 <xliff:g id="MINUTES">%d</xliff:g> 分钟。"</string>
-<<<<<<< HEAD
       <!---AppUser information-->
-=======
-    <!---Appuser information-->
->>>>>>> 6df97cc84d5e3d30df56c7b40f1e71485b39018a
     <string name="info_phone_text">手机号</string>
     <string name="info_nickname_text">昵称</string>
     <string name="info_brief_intro_text">个性签名</string>
