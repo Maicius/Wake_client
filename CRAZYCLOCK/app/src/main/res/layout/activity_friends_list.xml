@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
     tools:context="com.maicius.wake.InterChange.FriendsList"
     android:background="@drawable/ic_background2">
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/friendsListView"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/addFriendBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/addFriendBtn"
+        android:layout_alignStart="@+id/addFriendBtn" />
+
+    <Button
+        android:text="添加好友"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addFriendBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_red_dark"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
 </RelativeLayout>

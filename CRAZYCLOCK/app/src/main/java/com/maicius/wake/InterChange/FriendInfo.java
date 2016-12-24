@@ -55,6 +55,15 @@ public class FriendInfo extends Activity {
         listItem.put("icon", R.drawable.ic_clock_alarm_on);
         listItem.put("operateName", "查看他的起床时间");
         listItems.add(listItem);
+        Map<String, Object> listItem2 = new HashMap<String, Object>();
+        listItem2.put("icon", R.drawable.ic_night);
+        listItem2.put("operateName", "查看他的睡眠时间");
+        listItems.add(listItem2);
+        Map<String, Object> listItem3 = new HashMap<String, Object>();
+        listItem3.put("icon", R.drawable.ic_getup_tip);
+        listItem3.put("operateName", "设置他的起床提示语");
+        listItems.add(listItem3);
+
 
         //创建一个SimpleAdapter
         SimpleAdapter simpleAdapter = new SimpleAdapter(this, listItems,
