@@ -42,6 +42,7 @@
     <string name="sign_up">"注册"</string>
     <string name="wake_sure">"确认睡醒"</string>
     <string name="my_space">"我的空间"</string>
+    <string name="interDetector_text">"您已进入没有网络的异次元"</string>
     <string name="share">"分享我的起床时间"</string>
     <string name="done">"完成"</string>
     <string name="revert">"还原"</string>

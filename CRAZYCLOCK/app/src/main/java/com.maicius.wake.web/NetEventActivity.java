@@ -23,7 +23,7 @@ public abstract class NetEventActivity extends FragmentActivity implements Inter
         this.netState = netState;
         isNetConnect();
     }
-    private boolean isNetConnect(){
+    public boolean isNetConnect(){
         if(netState == 1)
             return true;
         else if(netState ==0)

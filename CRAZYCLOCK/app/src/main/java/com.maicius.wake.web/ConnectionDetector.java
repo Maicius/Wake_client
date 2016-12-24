@@ -9,9 +9,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 public class ConnectionDetector{
-    private static final int NETWORK_NONE = -1;
-    private static final int NETWORK_MOBILE = 0;
-    private static final int NETWORK_WIFI = 1;
+    public static final int NETWORK_NONE = -1;
+    public static final int NETWORK_MOBILE = 0;
+    public static final int NETWORK_WIFI = 1;
 
     public static int getNetworkState(Context context){
         ConnectivityManager connectivityManager =

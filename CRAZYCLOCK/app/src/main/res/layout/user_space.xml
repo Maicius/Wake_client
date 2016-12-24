@@ -11,9 +11,23 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="55dp" >
+        <TextView
+            android:text="@string/interDetector_text"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/InterDetector"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignParentTop="true"
+            android:visibility="gone"
+            android:background="#FDEEDE"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
             android:layout_centerVertical="true"
@@ -21,19 +35,18 @@
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="我的空间"
+            android:text="@string/my_space"
             android:id="@+id/userspace_name"
-            android:textSize="32dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:textSize="25sp"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_below="@+id/InterDetector"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:gravity="center_vertical|center_horizontal" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
 
     </RelativeLayout>

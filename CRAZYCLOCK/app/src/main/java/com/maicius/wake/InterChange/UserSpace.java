@@ -15,21 +15,34 @@ import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.DBmanager.*;
+import com.maicius.wake.web.ConnectionDetector;
 import com.maicius.wake.web.NetEventActivity;
 
 public class UserSpace extends NetEventActivity {
 
+    private TextView netStateView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.v("sss", "******************enter user space!");
         setContentView(R.layout.user_space);
-
+        netStateView = (TextView)findViewById(R.id.InterDetector);
+        boolean netState = this.isNetConnect();
+        if(netState){
+            netStateView.setVisibility(View.GONE);
+        }else{
+            netStateView.setVisibility(View.VISIBLE);
+        }
         mInitUI();
 
     }
     public void onNetChange(int netState){
-
+        super.onNetChange(netState);
+        if(netState == ConnectionDetector.NETWORK_NONE){
+            netStateView.setVisibility(View.VISIBLE);
+        }else{
+            netStateView.setVisibility(View.GONE);
+        }
     }
 
     private void mInitUI() {
