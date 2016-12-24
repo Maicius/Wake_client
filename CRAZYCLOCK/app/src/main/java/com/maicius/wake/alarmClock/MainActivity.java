@@ -71,7 +71,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
         updateLayout();
 
     }
-
     //加载界面alarm_clock
     private void updateLayout() {
         setContentView(R.layout.alarm_clock);

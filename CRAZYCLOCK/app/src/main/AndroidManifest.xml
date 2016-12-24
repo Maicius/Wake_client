@@ -148,6 +148,12 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name="com.maicius.wake.web.InternetBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="com.maicius.wake.InterChange.UserSpace"
             android:label="用户空间" />

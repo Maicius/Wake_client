@@ -2,36 +2,32 @@
  A detector of web
  */
 package com.maicius.wake.web;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 public class ConnectionDetector{
-    private Context context;
-    private boolean InternetConnect;
-    public ConnectionDetector(Context context){
-        this.context = context;
-        isConnectingToInternet();
-    }
-    public void isConnectingToInternet(){
+    private static final int NETWORK_NONE = -1;
+    private static final int NETWORK_MOBILE = 0;
+    private static final int NETWORK_WIFI = 1;
 
-        // Context context = context.getApplicationContext();
-        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null)
-        {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (int i = 0; i < info.length; i++)
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
-                    {
-                        InternetConnect= true;
-                    }
-
+    public static int getNetworkState(Context context){
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if(activeNetworkInfo !=null && activeNetworkInfo.isConnected()){
+            if(activeNetworkInfo.getType()==(ConnectivityManager.TYPE_MOBILE)){
+                return NETWORK_MOBILE;
+            }
+            else if(activeNetworkInfo.getType() == (ConnectivityManager.TYPE_WIFI)){
+                return NETWORK_WIFI;
+            }
+        }else {
+            return NETWORK_NONE;
         }
-        else
-            InternetConnect = false;
-    }
-    public boolean getInternetConnect(){
-        return InternetConnect;
+        return NETWORK_NONE;
     }
 }
+

@@ -81,8 +81,6 @@ public class LogIn extends Activity {
     public class MyThread implements Runnable {
         @Override
         public void run() {
-            ConnectionDetector connectionDetector = new ConnectionDetector(LogIn.this);
-            if (connectionDetector.getInternetConnect()) {
                 info = WebService.executeHttpGet(username.getText().toString(), password.getText().toString(), WebService.State.LogIn);
                 Log.v("sss", "login:" + info);
                 handler.post(new Runnable() {
@@ -122,11 +120,6 @@ public class LogIn extends Activity {
                         }
                     }
                 });
-            }else{
-                dialog.dismiss();
-                Toast toast = Toast.makeText(LogIn.this, "网络未连接", Toast.LENGTH_LONG);
-                toast.show();
-            }
         }
     }
 

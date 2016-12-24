@@ -15,8 +15,9 @@ import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.DBmanager.*;
+import com.maicius.wake.web.NetEventActivity;
 
-public class UserSpace extends Activity {
+public class UserSpace extends NetEventActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,9 @@ public class UserSpace extends Activity {
         setContentView(R.layout.user_space);
 
         mInitUI();
+
+    }
+    public void onNetChange(int netState){
 
     }
 

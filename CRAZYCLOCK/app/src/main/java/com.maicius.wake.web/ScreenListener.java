@@ -10,6 +10,7 @@ import android.os.PowerManager;
 /**
  * Created by Maicius on 2016/12/23.
  * 获取屏幕状态,用以判断开始睡眠的时间
+ * 因为是动态注册，所以不需要再manifest.xml里注册
  */
 public class ScreenListener {
     private Context context;
