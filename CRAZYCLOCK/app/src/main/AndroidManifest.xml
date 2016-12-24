@@ -137,7 +137,7 @@
             </intent-filter>
         </service>
         <service
-            android:name="com.maicius.wake.InterChange.SyncDatabase"></service>
+            android:name="com.maicius.wake.DBmanager.SyncDatabase"></service>
 
         <receiver android:name=".AlarmInitReceiver">
             <intent-filter>

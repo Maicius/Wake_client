@@ -2,6 +2,8 @@ package com.maicius.wake.web;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
+
 /**
  * Created by Maicius on 2016/12/24.
  */
@@ -32,4 +34,5 @@ public abstract class NetEventActivity extends FragmentActivity implements Inter
             return false;
         return false;
     }
+
 }

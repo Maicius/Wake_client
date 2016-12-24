@@ -16,7 +16,7 @@ public class DBHelpers extends SQLiteOpenHelper {
 
     }
     public void onCreate(SQLiteDatabase db){
-        String sql = "create table sqlUser(\n" +
+        String sql = "create table appUser(\n" +
                 "\tusername varchar(255) primary key,\n" +
                 "\tpassword varchar(255),\n" +
                 "\tnickname varchar(255)\n" +
@@ -34,13 +34,23 @@ public class DBHelpers extends SQLiteOpenHelper {
                 "\tget_up_time_id int primary key,\n" +
                 "\tusername varchar(255),\n" +
                 "\tget_up_time varchar(255),\n" +
-                "\tforeign key(username) references appuser(username)\n" +
+                "\tforeign key(username) references appUser(username)\n" +
+                ")";
+        db.execSQL(sql);
+        sql = "create table sleep(\n" +
+                "\tsleep_id int,\n" +
+                "\tusername varchar,\n" +
+                "\tsleep numeric(4,2),\n" +
+                "\tprimary key(sleep_id),\n" +
+                "\tforeign key(username) references appUser(username)\n" +
                 ")";
         db.execSQL(sql);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS sleepTime");
-        db.execSQL("DROP TABLE IF EXISTS sqlUser");
+        db.execSQL("DROP TABLE IF EXISTS getUpTime");
+        db.execSQL("DROP TABLE IF EXISTS sleep");
+        db.execSQL("DROP TABLE IF EXISTS appUser");
         onCreate(db);
     }
 

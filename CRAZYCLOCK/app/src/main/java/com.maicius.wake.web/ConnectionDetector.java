@@ -2,9 +2,7 @@
  A detector of web
  */
 package com.maicius.wake.web;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
