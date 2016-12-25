@@ -6,13 +6,18 @@
  */
 package com.maicius.wake.InterChange;
 
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.DBmanager.SyncDatabase;
@@ -25,6 +30,19 @@ public class UserSpace extends NetEventActivity {
 
     private TextView netStateView;
     private DBManager dbManager;
+    private SyncDatabase.MyBinder myBinder;
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            myBinder = (SyncDatabase.MyBinder)service;
+            myBinder.uploadData();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +50,15 @@ public class UserSpace extends NetEventActivity {
         setContentView(R.layout.user_space);
         netStateView = (TextView)findViewById(R.id.InterDetector);
         dbManager = new DBManager(this);
-
+        startSyncDatabase();
         boolean netState = this.isNetConnect();
         if(netState){
             Cursor sleepTable = dbManager.query("sleep");
             if(sleepTable.getCount() !=0) {
                 Intent startIntent = new Intent(this, SyncDatabase.class);
                 startService(startIntent);
+                //Intent bindIntent = new Intent(this, SyncDatabase.class);
+                //bindService(bindIntent, connection, BIND_AUTO_CREATE);
             }
             else{
                 Intent stopIntent = new Intent(this, SyncDatabase.class);
@@ -57,15 +77,18 @@ public class UserSpace extends NetEventActivity {
         if(netState == ConnectionDetector.NETWORK_NONE){
             netStateView.setVisibility(View.VISIBLE);
         }else{
-            Cursor sleepTable = dbManager.query("sleep");
             netStateView.setVisibility(View.GONE);
+            Cursor sleepTable = dbManager.query("sleep");
+            Toast.makeText(this, "SleepTable"+sleepTable.getCount(),Toast.LENGTH_SHORT).show();
             if(sleepTable.getCount() !=0) {
-                Intent startIntent = new Intent(this, SyncDatabase.class);
-                startService(startIntent);
+                Log.w("debug","bind start");
+                Intent bindIntent = new Intent(this, SyncDatabase.class);
+                bindService(bindIntent, connection, BIND_AUTO_CREATE);
             }
             else{
-                Intent stopIntent = new Intent(this, SyncDatabase.class);
-                stopService(stopIntent);
+
+                Toast.makeText(this, "bind end",Toast.LENGTH_SHORT).show();
+                Log.w("debug","service end");
             }
         }
     }
@@ -99,6 +122,7 @@ public class UserSpace extends NetEventActivity {
                 MainActivity.s_isLogged=false;
                 DBManager dbManager = new DBManager(UserSpace.this);
                 dbManager.deleteAppUser("appUser");
+                StopSyncDatabse();
                 UserSpace.this.finish();
             }
         });
@@ -113,6 +137,17 @@ public class UserSpace extends NetEventActivity {
                 startActivity(new Intent(UserSpace.this, SleepHistory.class));
             }
         });
+    }
+    private void startSyncDatabase() {
+        Intent startIntent = new Intent(this, SyncDatabase.class);
+        startService(startIntent);
+        Intent bindIntent = new Intent(this, SyncDatabase.class);
+        bindService(bindIntent, connection, BIND_AUTO_CREATE);
+    }
+    private void StopSyncDatabse(){
+        Intent stopIntent = new Intent(this, SyncDatabase.class);
+        stopService(stopIntent);
+        unbindService(connection);
     }
 
 }

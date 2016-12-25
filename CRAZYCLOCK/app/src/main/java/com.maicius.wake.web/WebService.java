@@ -33,15 +33,11 @@ public class WebService extends Activity{
         SetGetUpTip
     }
     // IP地址
-    //private static String IP = "116.62.41.211:8080";
+    private static String IP = "116.62.41.211:8080";
     //private static String IP = "192.168.191.1:8080";
-    //private static String IP = "192.168.1.135:8080";
-
-    // IP地址
-    //private static String IP = "116.62.41.211:8080";           //服务器地址
-    //private static String base = "http://" + IP;               //服务器程序基址
-    private static String IP = "192.168.191.1:8080";             //本地测试地址
-    private static String base = "http://" + IP +"/HelloWeb/";   //本地程序基址
+    //private static String IP = "192.168.1.135:8080";     //服务器程序基址
+    //private static String IP = "192.168.191.1:8080";             //本地测试地址
+    private static String base = "http://" + IP ;   //本地程序基址
 
     /**
      * DoGet
@@ -114,11 +110,9 @@ public class WebService extends Activity{
         String path="";
         switch (state) {
             case GetUpTime:
-                //path = "http://" + IP + "/HelloWeb/GetUpTime";
                 path = base + "/GetUpTime";
                 break;
             case SleepTime:
-                //path = "http://" + IP + "/HelloWeb/SleepTime";
                 path = base + "/SleepTime";
                 break;
         }

@@ -3,7 +3,9 @@ package com.maicius.wake.alarmClock;
  * MainActivity
  */
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.*;
 import android.content.Context;
@@ -31,10 +33,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maicius.wake.DBmanager.DBManager;
+import com.maicius.wake.DBmanager.ScreenUser;
+import com.maicius.wake.DBmanager.SyncDatabase;
 import com.maicius.wake.InterChange.LogIn;
+import com.maicius.wake.InterChange.SleepHistory;
 import com.maicius.wake.InterChange.UserSpace;
+import com.maicius.wake.web.ScreenListener;
 
 import cn.smssdk.SMSSDK;
 
@@ -44,6 +51,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     public static String s_userName = "18996720676";
     public static Boolean s_isLogged = false;
     public static String s_nickname = "maicius";
+    private ScreenListener screenListener;
     /**
      * This must be false for production.  If true, turns on logging,
      * test code, etc.
@@ -68,6 +76,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
         mCursor = Alarms.getAlarmsCursor(getContentResolver());
         dbManager = new DBManager(MainActivity.this);
         //更新布局界面
+        screenListener = new ScreenListener(this);
+        enableSleepTime();
         updateLayout();
 
     }
@@ -106,6 +116,35 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
             }
         });
+    }
+
+    private void enableSleepTime(){
+        screenListener.begin(new ScreenListener.ScreenStateListener() {
+            @Override
+            public void onScreenOn() {
+                Toast.makeText(MainActivity.this, "距离上次关闭手机不到10分钟，玩你麻痹手机，快去学习", Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onScreenOff() {
+                Log.w("sss", "ScrenOff");
+                SimpleDateFormat format =
+                        new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date curTime = new Date(System.currentTimeMillis());
+                String curSleepTime = format.format(curTime);
+                ScreenUser user =
+                        new ScreenUser(MainActivity.s_userName, curSleepTime);
+                dbManager.insertSQL(user);
+            }
+
+            @Override
+            public void onUserPresent() {
+                dbManager.deleteAppUser("sleepTime");
+                Log.w("sss", "ScrenPresent");
+            }
+        });
+    }
+    private void disableSleepTime(){
+        screenListener.unregisterListener();
     }
 
     /**
