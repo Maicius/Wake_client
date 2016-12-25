@@ -104,6 +104,10 @@ public class FriendInfo extends Activity {
                             tip = editText.getText().toString();
 //                            Log.v("Eric", "Tip input:" + tip);
 //                            Toast.makeText(FriendInfo.this, tip, Toast.LENGTH_SHORT).show();
+                            if (tip.equals("")) {
+                                Toast.makeText(FriendInfo.this, "不能为空哦", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             progressDialog.show();
                             new Thread(new SetTipThread()).start();
                         }

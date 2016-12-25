@@ -41,18 +41,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="FriendInfo.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FriendInfo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/maicius/wake/InterChange/FriendInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="174" column="118" selection-start-line="174" selection-start-column="118" selection-end-line="174" selection-end-column="118" />
+            <state relative-caret-position="657">
+              <caret line="111" column="67" selection-start-line="111" selection-start-column="67" selection-end-line="111" selection-end-column="67" />
               <folding>
-                <element signature="e#3394#5222#0" expanded="true" />
-                <element signature="e#4316#4862#0" expanded="true" />
-                <element signature="e#4861#4862#0" expanded="true" />
-                <element signature="e#5221#5222#0" expanded="true" />
-                <element signature="e#5481#5692#0" expanded="true" />
-                <element signature="e#5691#5692#0" expanded="true" />
+                <element signature="e#3394#5443#0" expanded="true" />
+                <element signature="e#4316#5083#0" expanded="true" />
+                <element signature="e#5082#5083#0" expanded="true" />
+                <element signature="e#5442#5443#0" expanded="true" />
+                <element signature="e#5702#5913#0" expanded="true" />
+                <element signature="e#5912#5913#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WebService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com.maicius.wake.web/WebService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="175" column="86" selection-start-line="175" selection-start-column="86" selection-end-line="175" selection-end-column="86" />
+            <state relative-caret-position="192">
+              <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -1667,8 +1667,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/maicius/wake/InterChange/ConditionSearchFriend.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/maicius/wake/InterChange/AddFriend.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/maicius/wake/InterChange/ContactInfoFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com.maicius.wake.web/WebService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/maicius/wake/InterChange/FriendInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com.maicius.wake.web/WebService.java" />
       </list>
     </option>
   </component>
@@ -2626,26 +2626,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com.maicius.wake.web/WebService.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/maicius/wake/InterChange/FriendInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="175" column="86" selection-start-line="175" selection-start-column="86" selection-end-line="175" selection-end-column="86" />
-          <folding />
+        <state relative-caret-position="657">
+          <caret line="111" column="67" selection-start-line="111" selection-start-column="67" selection-end-line="111" selection-end-column="67" />
+          <folding>
+            <element signature="e#3394#5443#0" expanded="true" />
+            <element signature="e#4316#5083#0" expanded="true" />
+            <element signature="e#5082#5083#0" expanded="true" />
+            <element signature="e#5442#5443#0" expanded="true" />
+            <element signature="e#5702#5913#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/maicius/wake/InterChange/FriendInfo.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com.maicius.wake.web/WebService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="174" column="118" selection-start-line="174" selection-start-column="118" selection-end-line="174" selection-end-column="118" />
-          <folding>
-            <element signature="e#3394#5222#0" expanded="true" />
-            <element signature="e#4316#4862#0" expanded="true" />
-            <element signature="e#4861#4862#0" expanded="true" />
-            <element signature="e#5221#5222#0" expanded="true" />
-            <element signature="e#5481#5692#0" expanded="true" />
-            <element signature="e#5691#5692#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="192">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

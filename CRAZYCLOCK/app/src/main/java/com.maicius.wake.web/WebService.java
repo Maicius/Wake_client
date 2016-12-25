@@ -31,8 +31,11 @@ public class WebService extends Activity{
         SetGetUpTip
     }
     // IP地址
-    //private static String IP = "116.62.41.211:8080";
-    private static String IP = "192.168.191.1:8080";
+    //private static String IP = "116.62.41.211:8080";           //服务器地址
+    //private static String base = "http://" + IP;               //服务器程序基址
+    private static String IP = "192.168.191.1:8080";             //本地测试地址
+    private static String base = "http://" + IP +"/HelloWeb/";   //本地程序基址
+
     ConnectionDetector connectionDetector;
     /**
      * DoGet
@@ -77,8 +80,7 @@ public class WebService extends Activity{
      */
     public static String executeHttpGet(String username, String password, State state) {
         String path;
-        path = "http://" + IP +"/HelloWeb/LogLet";
-        //path = "http://" + IP + "/LogLet";
+        path = base + "/LogLet";
         path = path + "?username=" + username + "&password=" + password;
         return doHttpGet(path);
     }
@@ -89,8 +91,7 @@ public class WebService extends Activity{
     public static String executeHttpGet(String username, String password,
                                         String nickname, State state) {
         String path;
-        path = "http://" + IP + "HelloWeb/RegLet";
-        //path = "http://" + IP + "/RegLet";
+        path = base + "/RegLet";
         try {
             path = path + "?username=" + username + "&password=" + password + "&nickname=" + URLEncoder.encode(nickname, "UTF-8");
         }catch(UnsupportedEncodingException e){
@@ -103,8 +104,7 @@ public class WebService extends Activity{
      */
     public static String executeHttpGet(long date, State state) {
 
-        String path = "http://" + IP + "HelloWeb/GetUpTime";
-        //String path = "http://" + IP + "/GetUpTime";
+        String path = base + "/GetUpTime";
         path = path + "?username=" + MainActivity.s_userName + "&date=" + String.valueOf(date);
         return doHttpGet(path);
 
@@ -116,16 +116,13 @@ public class WebService extends Activity{
         String path = "";
         switch (state) {
             case GetTimeList:
-                path = "http://" + IP + "/HelloWeb/TimeHistory";
-                //path = "http://" + IP + "/TimeHistory";
+                path = base+ "/TimeHistory";
                 break;
             case GetUserInfo:
-                path = "http://" + IP + "/HelloWeb/GetUserInfo";
-                //path = "http://" + IP + "/GetUserInfo";
+                path = base + "/GetUserInfo";
                 break;
             case GetFriendsList:
-                path = "http://" + IP + "/HelloWeb/GetFriendsList";
-                //path = "http://" + IP + "/GetFriendsList";
+                path = base + "/GetFriendsList";
                 break;
         }
         path = path + "?username=" + username;
@@ -137,15 +134,13 @@ public class WebService extends Activity{
         String path = "";
         switch (state) {
             case DeleteFriend:
-                path = "http://" + IP + "/HelloWeb/DeleteFriend";
-                //path = "http://" + IP + "/DeleteFriend";
+                path = base + "/DeleteFriend";
                 break;
             case AddFriend:
-                path = "http://" + IP + "/HelloWeb/AddFriend";
-                //path = "http://" + IP + "/AddFriend";
+                path = base + "/AddFriend";
                 break;
             case SearchFriend://通过用户输入的昵称和电话查找好友信息
-                path = "http://" + IP + "/HelloWeb/SearchFriend";
+                path = base + "/SearchFriend";
                 break;
         }
         //为了重用，如果是查找好友，第一个参数是指输入的昵称，第二个参数是指输入的用户名即电话
@@ -155,8 +150,7 @@ public class WebService extends Activity{
 
     public static String executeHttpGet(String username, String nickname, String brief_intro) {
         String path;
-        path = "http://" + IP + "/HelloWeb/SetUserInfo";
-        //path = "http://" + IP + "/SetUserInfo";
+        path = base + "/SetUserInfo";
         try {
             path = path + "?username=" + username + "&nickname=" + URLEncoder.encode(nickname, "UTF-8") + "&brief_intro=" + URLEncoder.encode(brief_intro, "UTF-8");
             Log.v("sss", path);
@@ -170,7 +164,7 @@ public class WebService extends Activity{
         String path = "";
         switch (state) {
             case SetGetUpTip:
-                path = "http://" + IP + "/HelloWeb/SetGetUpTip";
+                path = base + "/SetGetUpTip";
                 break;
         }
         path += "?username=" + username + "&friendname=" + friendname + "&tip=" + tip;
