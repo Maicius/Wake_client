@@ -2,13 +2,16 @@ package com.maicius.wake.InterChange;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -31,11 +34,18 @@ public class FriendInfo extends Activity {
     private String signature;
     private AlertDialog.Builder warningDialog;
     private String returnInfo;
+    private String tip;
+    private ProgressDialog progressDialog;
     private static Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_info);
+
+        progressDialog = new ProgressDialog(FriendInfo.this);
+        progressDialog.setTitle("提示");
+        progressDialog.setMessage("正在设置好友起床提示，请稍后...");
+        progressDialog.setCancelable(false);
         //获取传来的数据
         Intent intent = getIntent();
         nickName = intent.getStringExtra("nickName");
@@ -84,7 +94,27 @@ public class FriendInfo extends Activity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else if (i == 2) {  //设置好友起床提示语
-                    
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(FriendInfo.this);
+                    final EditText editText = new EditText(FriendInfo.this);
+                    alertDialog.setTitle("输入提示语");
+                    alertDialog.setView(editText);
+                    alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            tip = editText.getText().toString();
+//                            Log.v("Eric", "Tip input:" + tip);
+//                            Toast.makeText(FriendInfo.this, tip, Toast.LENGTH_SHORT).show();
+                            progressDialog.show();
+                            new Thread(new SetTipThread()).start();
+                        }
+                    });
+                    alertDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    alertDialog.create().show();
                 }
             }
         });
@@ -133,6 +163,28 @@ public class FriendInfo extends Activity {
                         return;
                     } else {
                         Toast.makeText(FriendInfo.this, "返回值为:" + returnInfo, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private class SetTipThread implements Runnable {
+        @Override
+        public void run() {
+            returnInfo = WebService.setGetUpTip(MainActivity.s_userName, phoneNum, tip, WebService.State.SetGetUpTip);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog.dismiss();
+                    if (returnInfo.equals("success")) {
+                        Toast.makeText(FriendInfo.this, "设置成功！", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (returnInfo.equals("failed")) {
+                        Toast.makeText(FriendInfo.this, "设置失败，请重试！", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        Toast.makeText(FriendInfo.this, "错误返回值为:" + returnInfo, Toast.LENGTH_SHORT).show();
                     }
                 }
             });

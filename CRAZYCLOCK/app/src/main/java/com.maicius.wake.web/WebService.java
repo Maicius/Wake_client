@@ -27,7 +27,8 @@ public class WebService extends Activity{
         GetFriendsList,
         DeleteFriend,
         AddFriend,
-        SearchFriend
+        SearchFriend,
+        SetGetUpTip
     }
     // IP地址
     //private static String IP = "116.62.41.211:8080";
@@ -162,6 +163,17 @@ public class WebService extends Activity{
         }catch(UnsupportedEncodingException e){
             e.printStackTrace();
         }
+        return doHttpGet(path);
+    }
+
+    public static String setGetUpTip(String username,String friendname, String tip, State state) {
+        String path = "";
+        switch (state) {
+            case SetGetUpTip:
+                path = "http://" + IP + "/HelloWeb/SetGetUpTip";
+                break;
+        }
+        path += "?username=" + username + "&friendname=" + friendname + "&tip=" + tip;
         return doHttpGet(path);
     }
 
