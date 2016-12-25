@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -43,6 +44,14 @@ public class FriendsList extends Activity {
         dialog.show();
 
         listItems = new ArrayList<Map<String, Object>>();
+
+        Button addFriendBtn = (Button) findViewById(R.id.addFriendBtn);
+        addFriendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FriendsList.this, AddFriend.class));
+            }
+        });
 
         //创建一个新的线程，用来获取好友信息
         new Thread(new MyThread()).start();

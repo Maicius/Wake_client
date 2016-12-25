@@ -103,4 +103,7 @@
         <item msgid="2740866721232379791">"30"</item>
     </string-array>
     <string name="alarm_klaxon_service_desc">"在 Clock 中设置的闹钟铃声播放服务。"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

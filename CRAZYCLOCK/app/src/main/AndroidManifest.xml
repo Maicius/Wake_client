@@ -176,8 +176,11 @@
         <activity
             android:name="com.maicius.wake.InterChange.FriendsList"
             android:label="我的好友" />
-        <activity android:name="com.maicius.wake.InterChange.FriendInfo"
+        <activity
+            android:name="com.maicius.wake.InterChange.FriendInfo"
             android:label="好友信息" />
+        <activity android:name="com.maicius.wake.InterChange.AddFriend"
+            android:label="添加好友" />
     </application>
 
 </manifest>
