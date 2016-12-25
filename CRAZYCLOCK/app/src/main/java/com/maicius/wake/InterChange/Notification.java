@@ -14,9 +14,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.maicius.wake.DBmanager.DBManager;
+import com.maicius.wake.DBmanager.GetUpUser;
 import com.maicius.wake.DBmanager.ScreenUser;
 import com.maicius.wake.DBmanager.SleepUser;
 import com.maicius.wake.alarmClock.MainActivity;
+import com.maicius.wake.web.ConnectionDetector;
 import com.maicius.wake.web.WebService;
 
 /**
@@ -26,7 +28,6 @@ public class Notification extends Activity {
 
     private ProgressDialog proDialog;
     private DBManager dbManager;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -51,6 +52,7 @@ public class Notification extends Activity {
                 proDialog.setMessage("正在上传起床时间，请稍后...");
                 proDialog.setCancelable(false);
                 proDialog.show();
+
                 //创建子线程
                 new Thread(new MyThread()).start();
                 Notification.this.finish();
@@ -64,7 +66,16 @@ public class Notification extends Activity {
     public class MyThread implements Runnable {
         public void run() {
             Calendar currentTime = Calendar.getInstance();
-            String info = WebService.executeHttpGet(currentTime.getTimeInMillis(), WebService.State.GetUpTime);
+            String info="";
+            if(ConnectionDetector.getNetworkState(Notification.this) !=-1) {
+                info = WebService.executeHttpGet
+                        (currentTime.getTimeInMillis(), WebService.State.GetUpTime);
+            }else{
+                GetUpUser getUpUser = new
+                        GetUpUser(MainActivity.s_userName, String.valueOf(currentTime.getTimeInMillis()));
+                dbManager.insertSQL(getUpUser);
+            }
+
             computeTimeDiff();
             Log.v("sss", info + "***");
             proDialog.dismiss();
@@ -102,9 +113,15 @@ public class Notification extends Activity {
             long days = diff / (1000 * 60 * 60 * 24);
             long hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
             //long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
-
-            SleepUser sleepUser = new SleepUser(MainActivity.s_userName, hours);
-            dbManager.insertSQL(sleepUser);
+            if(ConnectionDetector.getNetworkState(Notification.this)!=-1) {
+                String info = WebService.executeHttpGet(hours,
+                        WebService.State.SleepTime);
+                Log.v("sleepTimeInfo", info + "***");
+            }
+            else {
+                SleepUser sleepUser = new SleepUser(MainActivity.s_userName, hours);
+                dbManager.insertSQL(sleepUser);
+            }
         }catch(ParseException e){
             e.printStackTrace();
         }

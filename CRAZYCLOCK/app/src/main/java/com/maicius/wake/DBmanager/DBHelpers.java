@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DBHelpers extends SQLiteOpenHelper {
     private static final String DB_NAME = "clock.db";
-    private static final int VERSION = 3;
+    private static final int VERSION = 1;
     public DBHelpers(Context context){
         super(context, DB_NAME, null, VERSION);
 
@@ -45,8 +45,16 @@ public class DBHelpers extends SQLiteOpenHelper {
                 "\tforeign key(username) references appUser(username)\n" +
                 ")";
         db.execSQL(sql);
+        sql = "create table enableRecording(\n" +
+                "\tenable_id int primary key,\n" +
+                "\tusername varchar(255),\n" +
+                "\tenableSleep int,\n" +
+                "\tforeign key(username) references appUser(username)\n" +
+                ")";
+        db.execSQL(sql);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        db.execSQL("DROP TABLE IF EXISTS enableRecording");
         db.execSQL("DROP TABLE IF EXISTS sleepTime");
         db.execSQL("DROP TABLE IF EXISTS getUpTime");
         db.execSQL("DROP TABLE IF EXISTS sleep");

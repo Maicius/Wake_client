@@ -33,6 +33,7 @@ public class WebService extends Activity{
     // IP地址
     private static String IP = "116.62.41.211:8080";
     //private static String IP = "192.168.191.1:8080";
+    //private static String IP = "192.168.1.135:8080";
     ConnectionDetector connectionDetector;
     /**
      * DoGet
@@ -89,10 +90,11 @@ public class WebService extends Activity{
     public static String executeHttpGet(String username, String password,
                                         String nickname, State state) {
         String path;
-        //path = "http://" + IP + "HelloWeb/RegLet";
+        //path = "http://" + IP + "/HelloWeb/RegLet";
         path = "http://" + IP + "/RegLet";
         try {
-            path = path + "?username=" + username + "&password=" + password + "&nickname=" + URLEncoder.encode(nickname, "UTF-8");
+            path = path + "?username=" + username + "&password=" +
+                    password + "&nickname=" + URLEncoder.encode(nickname, "UTF-8");
         }catch(UnsupportedEncodingException e){
             e.printStackTrace();
         }
@@ -105,10 +107,11 @@ public class WebService extends Activity{
         String path="";
         switch (state) {
             case GetUpTime:
-            //String path = "http://" + IP + "HelloWeb/GetUpTime";
+                //path = "http://" + IP + "/HelloWeb/GetUpTime";
                 path = "http://" + IP + "/GetUpTime";
                 break;
             case SleepTime:
+                //path = "http://" + IP + "/HelloWeb/SleepTime";
                 path = "http://" + IP + "/SleepTime";
                 break;
         }
@@ -148,24 +151,32 @@ public class WebService extends Activity{
         String path = "";
         switch (state) {
             case DeleteFriend:
-                path = "http://" + IP + "/HelloWeb/DeleteFriend";
-                //path = "http://" + IP + "/DeleteFriend";
+                //path = "http://" + IP + "/HelloWeb/DeleteFriend";
+                path = "http://" + IP + "/DeleteFriend";
                 break;
             case AddFriend:
-                path = "http://" + IP + "/HelloWeb/AddFriend";
-                //path = "http://" + IP + "/AddFriend";
+                //path = "http://" + IP + "/HelloWeb/AddFriend";
+                path = "http://" + IP + "/AddFriend";
                 break;
         }
         path += "?userName=" + userName + "&friendName=" + friendName;
         return doHttpGet(path);
     }
 
+    /**
+     * 设置用户信息
+     * @param username
+     * @param nickname
+     * @param brief_intro
+     * @return
+     */
     public static String executeHttpGet(String username, String nickname, String brief_intro) {
         String path;
-        //path = "http://" + IP + "/HelloWeb/SetUserInfo";
-        path = "http://" + IP + "/SetUserInfo";
+        path = "http://" + IP + "/HelloWeb/SetUserInfo";
+        //path = "http://" + IP + "/SetUserInfo";
         try {
-            path = path + "?username=" + username + "&nickname=" + URLEncoder.encode(nickname, "UTF-8") + "&brief_intro=" + URLEncoder.encode(brief_intro, "UTF-8");
+            path = path + "?username=" + username + "&nickname="
+                    + URLEncoder.encode(nickname, "UTF-8") + "&brief_intro=" + URLEncoder.encode(brief_intro, "UTF-8");
             Log.v("sss", path);
         }catch(UnsupportedEncodingException e){
             e.printStackTrace();

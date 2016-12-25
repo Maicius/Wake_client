@@ -79,9 +79,6 @@ public class Register extends Activity {
                         || passwordText.getText().toString().length()>16){
                     raiseAlertDialog("提示","密码长度必须在6-16位之间");
                 }
-                else if(isContainChinese(nicknameText.getText().toString())){
-                    raiseAlertDialog("提示","sorry,暂不支持中文");
-                }
                 else{
                     new AlertDialog.Builder(Register.this)
                             .setTitle("发送短信")
@@ -136,12 +133,9 @@ public class Register extends Activity {
                 else if(passwordText.getText().toString().length()<6
                         || passwordText.getText().toString().length()>16){
                     raiseAlertDialog("提示","密码长度必须在6-16位之间");
-                }else if(verCodeText.getText().toString().length() != 4)
-                {
-                    raiseAlertDialog("提示","请输入4位验证码");
                 }
-                else if(isContainChinese(nicknameText.getText().toString())){
-                    raiseAlertDialog("提示","sorry,暂不支持中文");
+                else if(verCodeText.getText().toString().length() != 4)
+                {raiseAlertDialog("提示","请输入4位验证码");
                 }
                 else{
                     SMSSDK.submitVerificationCode("86", userPhone, verCodeText.getText().toString());
@@ -150,6 +144,7 @@ public class Register extends Activity {
                     dialog.setMessage("正在注册，请稍后...");
                     dialog.setCancelable(false);
                     dialog.show();
+                    //new Thread(new SignUpThread()).start();
                 }
             }
         });

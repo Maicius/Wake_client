@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import com.maicius.wake.InterChange.FriendInfo;
 import com.maicius.wake.web.ConnectionDetector;
 import com.maicius.wake.web.WebService;
 
@@ -24,6 +23,7 @@ public class SyncDatabase extends Service{
     private String returnInfo;
     private static Handler handler = new Handler();
     private MyBinder binder = new MyBinder();
+    private Cursor c;
     @Override
     public void onCreate(){
         super.onCreate();
@@ -39,12 +39,11 @@ public class SyncDatabase extends Service{
         return binder;
     }
     class MyBinder extends Binder {
-        public void uploadSleepTime() {
+        public void uploadData() {
             dbManager = new DBManager(SyncDatabase.this);
-            int netState = ConnectionDetector.getNetworkState(SyncDatabase.this);
-            if (netState == 0 || netState == 1) {
-                Cursor c = dbManager.query("sleep");
-                c.moveToFirst();
+            c = dbManager.query("sleep");
+            c.moveToFirst();
+            while(c.getCount() != 0){
                 final long sleep = Long.parseLong(c.getString(2));
                 returnInfo = WebService.executeHttpGet(sleep,
                         WebService.State.SleepTime);
@@ -52,19 +51,15 @@ public class SyncDatabase extends Service{
                     @Override
                     public void run() {
                         if (returnInfo.equals("success")) {
-                            dbManager.deleteAppUser("sleep");
-                            return;
-                        } else if (returnInfo.equals("failed")) {
-                            return;
-                        } else {
+                            dbManager.deleteData("sleep", "sleep", c.getString(2));
+                            c.moveToNext();
+                        }else {
                             //Debug
                             Toast.makeText(SyncDatabase.this, "返回值:"
                                     + returnInfo, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-            } else {
-
             }
         }
     }
