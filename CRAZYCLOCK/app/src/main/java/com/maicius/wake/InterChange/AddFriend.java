@@ -9,6 +9,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.web.WebService;
 
@@ -36,6 +38,7 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
     private Fragment fragment;
     private AlertDialog.Builder warningDialog;
     private String returnInfo, nickName, phone;
+    private String addFriendName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +104,20 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
 
     @Override
     public void SendMessageValue(String value) {
-        //Toast.makeText(AddFriend.this, value, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AddFriend.this, "Selected User's phone:"+value, Toast.LENGTH_SHORT).show();
+//        this.addFriendName = value;
+//        dialog.setMessage("正在添加，请稍后...");
+//        dialog.show();
+//        new Thread(new AddFriendThread()).start();
+    }
 
+    @Override
+    public void SendAddFriendInfo(String phone) {
+        //Toast.makeText(AddFriend.this, "Selected User's phone:"+phone, Toast.LENGTH_SHORT).show();
+        this.addFriendName = phone;
+        dialog.setMessage("正在添加，请稍后...");
+        dialog.show();
+        new Thread(new AddFriendThread()).start();
     }
 
     @Override
@@ -175,7 +190,7 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(AddFriend.this, returnInfo, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(AddFriend.this, returnInfo, Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     if (returnInfo.equals("failed")) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddFriend.this);
@@ -208,6 +223,54 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.container, fragment);
                         ft.commit();
+                    }
+                }
+            });
+        }
+    }
+
+    private class AddFriendThread implements Runnable {
+        @Override
+        public void run() {
+            returnInfo = WebService.friendOperation(MainActivity.s_userName, addFriendName, WebService.State.AddFriend);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.dismiss();
+                    if (returnInfo.equals("failed")) {
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddFriend.this);
+                        alertDialog.setTitle("错误信息").setMessage("添加失败!\n请检查网络连接或重试");
+                        alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alertDialog.create().show();
+                        return;
+                    } else {
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddFriend.this);
+                        alertDialog.setTitle("错误信息");
+                        alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        //Toast.makeText(AddFriend.this, returnInfo, Toast.LENGTH_SHORT).show();
+                        if (returnInfo.equals("notuser")) {
+                            alertDialog.setMessage("他还不是我们的用户哦！");
+                            alertDialog.create().show();
+                        } else if (returnInfo.equals("already")) {
+                            alertDialog.setMessage("你们已经是好友了哦!");
+                            alertDialog.create().show();
+                        } else if (returnInfo.equals("success")) {
+                            Toast.makeText(AddFriend.this, "添加成功!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(AddFriend.this, FriendsList.class));
+                        } else {
+                            alertDialog.setMessage("添加失败！\n请检查网络连接或重试");
+                            alertDialog.create().show();
+                        }
                     }
                 }
             });

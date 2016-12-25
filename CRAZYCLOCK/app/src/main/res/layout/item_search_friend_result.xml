@@ -11,7 +11,8 @@
         android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp"
         android:id="@+id/nickNameTextView"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_red_dark" />
 
     <TextView
         android:text="@string/default_phonenumber"
@@ -37,17 +38,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:text="添加"
-        android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_red_dark"
-        android:layout_alignTop="@+id/phoneNumTextView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/phoneNumTextView" />
 
 </RelativeLayout>

@@ -5,13 +5,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maicius.wake.alarmClock.R;
@@ -30,6 +33,7 @@ public class ContactInfoFragment extends Fragment {
     private List<Map<String, Object>> listItems;
     private SimpleAdapter adapter;
     private ListView listView;
+    private String addFriendPhone;
     //定义一个回调接口，该gragment所在的activity需要实现这个接口
     private CallBackValue callBackValue;
 
@@ -76,24 +80,30 @@ public class ContactInfoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_contact_info, container, false);
         listView = (ListView)rootView.findViewById(R.id.contactListView);
         listView.setAdapter(this.adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.v("sss", "clicked");
-                final HashMap<String, Object> clickedItem = (HashMap<String, Object>)listView.getItemAtPosition(i);
-                final Button btn = (Button) view.findViewById(R.id.searchBtn);
-                final String phone = clickedItem.get("phone").toString();
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Log.v("sss", "clicked" + btn.getId());
-                        callBackValue.SendMessageValue(phone);
-                    }
-                });
-
-            }
-        });
+//        listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+//            @Override
+//            public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+//                contextMenu.add(0,0,0,"添加为好友");
+//                int position = ((AdapterView.AdapterContextMenuInfo)contextMenuInfo).position;
+//                addFriendPhone = ((TextView)listView.getChildAt(position).findViewById(R.id.phoneNumTextView)).getText().toString();
+//            }
+//        });
         return rootView;
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        String id = String.valueOf(info.id);
+        //点击的item在listview中的位置
+        //Toast.makeText(getActivity(), id, Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case 0:                 //添加好友
+                callBackValue.SendMessageValue(this.addFriendPhone);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override

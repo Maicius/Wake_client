@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.maicius.wake.alarmClock.R;
 
@@ -29,6 +32,7 @@ public class ConditionSearchFriend extends Fragment {
     private CallBackInputValue callback;
     private List<Map<String, Object>> listItems;
     private SimpleAdapter adapter;
+    private String addFriendPhone;
     public ConditionSearchFriend() {
         // Required empty public constructor
     }
@@ -82,21 +86,30 @@ public class ConditionSearchFriend extends Fragment {
                 callback.SendInputValue(nickName, telnumber);
             }
         });
-        ListView listView = (ListView)rootView.findViewById(R.id.searchResultListView);
+        final ListView listView = (ListView)rootView.findViewById(R.id.searchResultListView);
         listView.setAdapter(this.adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Button btn = (Button) view.findViewById(R.id.searchBtn);
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Log.v("sss", "clicked in conditionsearch.");
-                    }
-                });
+            public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                contextMenu.add(0,0,0,"添加为好友");
+                int position = ((AdapterView.AdapterContextMenuInfo)contextMenuInfo).position;
+                addFriendPhone = ((TextView)listView.getChildAt(position).findViewById(R.id.phoneNumTextView)).getText().toString();
             }
         });
         return rootView;
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        String id = String.valueOf(info.id);
+        switch (item.getItemId()) {
+            case 0:                 //添加好友
+                callback.SendAddFriendInfo(addFriendPhone);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -105,7 +118,10 @@ public class ConditionSearchFriend extends Fragment {
         callback = (CallBackInputValue) getActivity();
     }
 
+
+
     public interface CallBackInputValue {
         void SendInputValue(String nickName, String phone);
+        void SendAddFriendInfo(String phone);
     }
 }

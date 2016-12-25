@@ -75,7 +75,7 @@ public class FriendInfo extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0)
+                if (i == 0)        //查看好友起床信息
                 {
                     Intent intent = new Intent();
                     intent.setClass(FriendInfo.this, GetUpHistory.class);
@@ -83,6 +83,8 @@ public class FriendInfo extends Activity {
                     bundle.putString("username", phoneNum);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                } else if (i == 2) {  //设置好友起床提示语
+                    
                 }
             }
         });
