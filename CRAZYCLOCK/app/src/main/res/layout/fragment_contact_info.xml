@@ -11,6 +11,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:focusable="false"
+        android:clickable="false"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -34,6 +36,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="483dp"
+            android:clickable="true"
+            android:focusable="true"
             android:id="@+id/contactListView" />
 
     </LinearLayout>

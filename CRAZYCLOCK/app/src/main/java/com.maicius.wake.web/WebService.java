@@ -26,7 +26,8 @@ public class WebService extends Activity{
         GetUserInfo,
         GetFriendsList,
         DeleteFriend,
-        AddFriend
+        AddFriend,
+        SearchFriend
     }
     // IP地址
     //private static String IP = "116.62.41.211:8080";
@@ -123,7 +124,7 @@ public class WebService extends Activity{
                 break;
             case GetFriendsList:
                 path = "http://" + IP + "/HelloWeb/GetFriendsList";
-                //path = "http:// + IP + "/GetFriendsList";
+                //path = "http://" + IP + "/GetFriendsList";
                 break;
         }
         path = path + "?username=" + username;
@@ -142,7 +143,11 @@ public class WebService extends Activity{
                 path = "http://" + IP + "/HelloWeb/AddFriend";
                 //path = "http://" + IP + "/AddFriend";
                 break;
+            case SearchFriend://通过用户输入的昵称和电话查找好友信息
+                path = "http://" + IP + "/HelloWeb/SearchFriend";
+                break;
         }
+        //为了重用，如果是查找好友，第一个参数是指输入的昵称，第二个参数是指输入的用户名即电话
         path += "?userName=" + userName + "&friendName=" + friendName;
         return doHttpGet(path);
     }
