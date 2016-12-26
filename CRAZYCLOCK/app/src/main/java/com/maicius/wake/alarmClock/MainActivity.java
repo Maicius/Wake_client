@@ -136,7 +136,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
      */
     private void SignIn() {
         if (!s_isLogged) {
-
             Cursor rs = dbManager.query("appUser");
             if(rs.getCount()!=0) {
                 rs.moveToFirst();

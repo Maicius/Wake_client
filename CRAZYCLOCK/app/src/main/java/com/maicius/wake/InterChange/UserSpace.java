@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.maicius.wake.AboutUs.AboutUs;
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.DBmanager.ScreenOffUser;
 import com.maicius.wake.DBmanager.ScreenUser;
@@ -113,10 +114,13 @@ public class UserSpace extends NetEventActivity {
 
         ImageView image_userInfo = (ImageView) findViewById(R.id.userInfo);
         ImageView image_getUpTime = (ImageView) findViewById(R.id.getUpTime);
-        ImageView image_exit = (ImageView) findViewById(R.id.exit);
+        ImageView image_exit = (ImageView) findViewById(R.id.imageView2);
         ImageView image_friends = (ImageView) findViewById(R.id.friendImageView);
         ImageView image_sleepHistory = (ImageView) findViewById(R.id.sleep_history_image);
         ImageView image_phoneTime =(ImageView) findViewById(R.id.phoneIcon);
+        ImageView image_exit_main = (ImageView) findViewById(R.id.exit_main);
+        ImageView image_about_us = (ImageView) findViewById(R.id.aboutUs);
+
         image_phoneTime.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(UserSpace.this, ScreenOffList.class));
@@ -125,6 +129,16 @@ public class UserSpace extends NetEventActivity {
         image_userInfo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(UserSpace.this, UserInfo.class));
+            }
+        });
+        image_exit_main.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(UserSpace.this, MainActivity.class));
+            }
+        });
+        image_about_us.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(UserSpace.this, AboutUs.class));
             }
         });
         image_getUpTime.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +154,6 @@ public class UserSpace extends NetEventActivity {
         image_exit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 MainActivity.s_isLogged=false;
-                DBManager dbManager = new DBManager(UserSpace.this);
                 dbManager.deleteAppUser("sleep");
                 dbManager.deleteAppUser("enableRecording");
                 dbManager.deleteAppUser("getUpTime");
