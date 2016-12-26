@@ -30,7 +30,8 @@ public class WebService extends Activity{
         SleepTime,
         GetSleepTime,
         SearchFriend,
-        SetGetUpTip
+        SetGetUpTip,
+        GetGetUpTip
     }
     // IP地址
     private static String IP = "116.62.41.211:8080";
@@ -60,6 +61,7 @@ public class WebService extends Activity{
 
         } catch (Exception e) {
             e.printStackTrace();
+            //return "服务器连接超时...";
         } finally {
 
             // 意外退出时进行连接关闭保护
@@ -138,6 +140,9 @@ public class WebService extends Activity{
                 break;
             case GetSleepTime:
                 path = base + "/GetSleepTime";
+                break;
+            case GetGetUpTip:
+                path = base +"/GetGetUpTip";
         }
         path = path + "?username=" + username;
         Log.v("sss", path);
@@ -182,14 +187,18 @@ public class WebService extends Activity{
         return doHttpGet(path);
     }
 
-    public static String setGetUpTip(String username,String friendname, String tip, State state) {
+    public static String setGetUpTip(String username,String friendname, String tip, State state){
         String path = "";
         switch (state) {
             case SetGetUpTip:
                 path = base + "/SetGetUpTip";
                 break;
         }
-        path += "?username=" + username + "&friendname=" + friendname + "&tip=" + tip;
+        try {
+            path += "?username=" + username + "&friendname=" + friendname + "&tip=" + URLEncoder.encode(tip, "UTF-8");
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
         return doHttpGet(path);
     }
 

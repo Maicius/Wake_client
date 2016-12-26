@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -21,34 +22,43 @@ import android.widget.Toast;
 
 import com.maicius.wake.DBmanager.AppUser;
 import com.maicius.wake.DBmanager.DBManager;
+import com.maicius.wake.DBmanager.SyncDatabase;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.web.ConnectionDetector;
+import com.maicius.wake.web.NetEventActivity;
 import com.maicius.wake.web.WebService;
 
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
-public class LogIn extends Activity {
+public class LogIn extends NetEventActivity {
     //创建等待框
     private ProgressDialog dialog;
     //返回的数据
     private String info;
     EditText username, password;
     Button SignIn;
+    private boolean netState;
     private static Handler handler = new Handler();
-
+    private TextView netStateView;
     public void onCreate(Bundle savedInstanceState) {
         Log.v("maicius", "enter sign in");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
-
+        netStateView = (TextView)findViewById(R.id.Inter_detector);
         TextView Register = (TextView) findViewById(R.id.register);
         SignIn = (Button) findViewById(R.id.signin_button);
         username = (EditText) findViewById(R.id.username_edit);
         password = (EditText) findViewById(R.id.password_edit);
         password.addTextChangedListener(textWatcher);
         SignIn.setEnabled(false);
+        netState = this.isNetConnect();
+        if(netState){
+            netStateView.setVisibility(View.GONE);
+        }else{
+            netStateView.setVisibility(View.VISIBLE);
+        }
         //点击注册
         Register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -63,6 +73,9 @@ public class LogIn extends Activity {
                 if(!isUserName(username.getText().toString())){
                     raiseAlertDialog("提示","不能识别的手机号码");
                 }
+                else if(!netState){
+                    raiseAlertDialog("提示","没有检测到网络，请检查网络连接");
+                }
                 else {
                     dialog = new ProgressDialog(LogIn.this);
                     dialog.setTitle("提示");
@@ -76,7 +89,16 @@ public class LogIn extends Activity {
         });
         //setContentView(R.layout.user_space);
     }
-
+    public void onNetChange(int netState){
+        super.onNetChange(netState);
+        if(netState == ConnectionDetector.NETWORK_NONE){
+            netStateView.setVisibility(View.VISIBLE);
+            this.netState = false;
+        }else{
+            netStateView.setVisibility(View.GONE);
+            this.netState = true;
+        }
+    }
     // 子线程接收数据，主线程修改数据
     public class MyThread implements Runnable {
         @Override

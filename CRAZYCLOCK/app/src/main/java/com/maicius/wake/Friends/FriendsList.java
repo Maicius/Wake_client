@@ -1,4 +1,4 @@
-package com.maicius.wake.InterChange;
+package com.maicius.wake.Friends;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,14 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;

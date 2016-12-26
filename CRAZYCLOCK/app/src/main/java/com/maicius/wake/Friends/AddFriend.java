@@ -1,10 +1,9 @@
-package com.maicius.wake.InterChange;
+package com.maicius.wake.Friends;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -12,23 +11,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.web.WebService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 public class AddFriend extends Activity implements ActionBar.TabListener, ContactInfoFragment.CallBackValue,
         ConditionSearchFriend.CallBackInputValue {
@@ -43,8 +36,6 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-
-
         dialog = new ProgressDialog(AddFriend.this);
         dialog.setTitle("提示");
         dialog.setMessage("正在获取联系人信息，请稍后...");

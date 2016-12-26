@@ -28,17 +28,27 @@ public class Notification extends Activity {
 
     private ProgressDialog proDialog;
     private DBManager dbManager;
+    String greeting, greeting_sender;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //Activity.onCreate(savedInstanceState);
+        Cursor c = dbManager.query("greeting");
+        if(c.getCount()!=0) {
+            c.moveToFirst();
+            greeting = c.getString(3);
+            greeting_sender ="From:"+ c.getString(2);
+        }else{
+            greeting = "温馨提醒";
+            greeting_sender = "喂，起床了吗？";
+        }
         Log.v("maicius", "Notification Entered******************");
         AlertDialog.Builder dialog = new AlertDialog.Builder(Notification.this);
-        dialog.setTitle("温馨提醒").setMessage("你真的醒了吗？");
+        dialog.setTitle(greeting_sender).setMessage(greeting);
 
         dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                new Thread(new MyThread()).start();
                 Notification.this.finish();
             }
         });
@@ -46,13 +56,6 @@ public class Notification extends Activity {
         dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                proDialog = new ProgressDialog(Notification.this);
-                proDialog.setTitle("提示");
-                proDialog.setMessage("正在上传起床时间，请稍后...");
-                proDialog.setCancelable(false);
-                proDialog.show();
-
                 //创建子线程
                 new Thread(new MyThread()).start();
                 Notification.this.finish();
@@ -91,7 +94,8 @@ public class Notification extends Activity {
                 sleepTimeCur.moveToFirst();//用户最后一次解锁时间
                 sleepTimeCur.moveToNext();//用户最后一次解锁时间之后的第一次屏幕关闭时间
                 sleepTime = sleepTimeCur.getString(2);
-            }else{
+            }
+            else{
                 Calendar currentTime = Calendar.getInstance();
                 currentTime.add(Calendar.DAY_OF_MONTH, -1);
                 int year = currentTime.get(Calendar.YEAR);

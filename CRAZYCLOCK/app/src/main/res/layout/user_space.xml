@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="55dp" >
         <TextView
-            android:text="@string/interDetector_text"
+            android:text="@string/inter_detector_text"
             android:textSize="12sp"
             android:gravity="center"
             android:textColor="#000000"
@@ -139,16 +139,6 @@
             android:layout_alignBottom="@+id/friendsTextView"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="睡眠历史"
-            android:id="@+id/sleep_history_text"
-            android:layout_gravity="center"
-            android:layout_alignBottom="@+id/sleep_history_image"
-            android:layout_alignLeft="@+id/sleep_history_image"
-            android:layout_alignStart="@+id/sleep_history_image" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -159,15 +149,66 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
+        <TextView
+            android:text="睡眠历史"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/sleep_history_image"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_alignStart="@+id/textView2" />
+
+        <TextView
+            android:text="排行榜"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:layout_below="@+id/sleep_history_image"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_alignStart="@+id/textView3" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sleep_history_image"
             android:src="@drawable/sleep_history_icon"
             android:layout_gravity="center"
-            android:layout_above="@+id/friendImageView"
-            android:layout_alignRight="@+id/userInfo"
-            android:layout_alignEnd="@+id/userInfo" />
+            android:layout_alignBottom="@+id/rank"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rank"
+            android:src="@drawable/rank"
+            android:layout_gravity="right"
+            android:layout_alignBottom="@+id/getUpTime"
+            android:layout_alignLeft="@+id/exit"
+            android:layout_alignStart="@+id/exit"
+            android:layout_marginBottom="13dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phoneIcon"
+            android:src="@drawable/phone"
+            android:layout_gravity="right"
+            android:layout_alignTop="@+id/userInfo"
+            android:layout_alignRight="@+id/textView"
+            android:layout_alignEnd="@+id/textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="手机时间"
+
+            android:id="@+id/textView7"
+            android:layout_gravity="center"
+            android:layout_alignBaseline="@+id/textView2"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_alignRight="@+id/exit"
+            android:layout_alignEnd="@+id/exit" />
 
 
     </RelativeLayout>

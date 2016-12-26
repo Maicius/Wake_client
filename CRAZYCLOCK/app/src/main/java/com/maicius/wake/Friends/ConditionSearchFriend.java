@@ -1,4 +1,4 @@
-package com.maicius.wake.InterChange;
+package com.maicius.wake.Friends;
 
 
 import android.app.Activity;

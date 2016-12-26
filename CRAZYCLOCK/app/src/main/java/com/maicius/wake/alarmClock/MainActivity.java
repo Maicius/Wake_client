@@ -3,6 +3,7 @@ package com.maicius.wake.alarmClock;
  * MainActivity
  */
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maicius.wake.DBmanager.DBManager;
+import com.maicius.wake.DBmanager.ScreenOffUser;
 import com.maicius.wake.DBmanager.ScreenUser;
 import com.maicius.wake.DBmanager.SyncDatabase;
 import com.maicius.wake.InterChange.LogIn;
@@ -51,7 +53,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     public static String s_userName = "18996720676";
     public static Boolean s_isLogged = false;
     public static String s_nickname = "maicius";
-    private ScreenListener screenListener;
+
     /**
      * This must be false for production.  If true, turns on logging,
      * test code, etc.
@@ -63,6 +65,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
     private ListView mAlarmsList;
     private Cursor mCursor;
     private DBManager dbManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +78,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
         //获取闹钟的cursor
         mCursor = Alarms.getAlarmsCursor(getContentResolver());
         dbManager = new DBManager(MainActivity.this);
+
+        //enableSleepTime();
         //更新布局界面
-        screenListener = new ScreenListener(this);
-        enableSleepTime();
         updateLayout();
 
     }
@@ -118,34 +121,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         });
     }
 
-    private void enableSleepTime(){
-        screenListener.begin(new ScreenListener.ScreenStateListener() {
-            @Override
-            public void onScreenOn() {
-                Toast.makeText(MainActivity.this, "距离上次关闭手机不到10分钟，玩你麻痹手机，快去学习", Toast.LENGTH_LONG).show();
-            }
-            @Override
-            public void onScreenOff() {
-                Log.w("sss", "ScrenOff");
-                SimpleDateFormat format =
-                        new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                Date curTime = new Date(System.currentTimeMillis());
-                String curSleepTime = format.format(curTime);
-                ScreenUser user =
-                        new ScreenUser(MainActivity.s_userName, curSleepTime);
-                dbManager.insertSQL(user);
-            }
 
-            @Override
-            public void onUserPresent() {
-                dbManager.deleteAppUser("sleepTime");
-                Log.w("sss", "ScrenPresent");
-            }
-        });
-    }
-    private void disableSleepTime(){
-        screenListener.unregisterListener();
-    }
 
     /**
      * add alarm
@@ -254,8 +230,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
             }
         }
     }
-
-    ;
 
     //更新checkbox
     private void updateIndicatorAndAlarm(boolean enabled, ImageView bar,
@@ -410,14 +384,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Intent intent = new Intent(MainActivity.this, android.app.Notification.class);
-        PendingIntent pi = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-
-        Calendar currentTime = Calendar.getInstance();
-        //设置时间间隔为2分钟
-        AlarmManager aManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        aManager.set(AlarmManager.RTC_WAKEUP, currentTime.getTimeInMillis() + 1000 * 60 * 2, pi);
-        Log.v("maicius", "Notification is set");
+        UserSpace userSpace = new UserSpace();
+        userSpace.disableSleepTime();
+        dbManager.deleteAppUser("sleepTime");
         ToastMaster.cancelToast();
         mCursor.close();
         dbManager.close();

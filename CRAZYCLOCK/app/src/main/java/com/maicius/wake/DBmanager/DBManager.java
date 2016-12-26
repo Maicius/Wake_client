@@ -12,7 +12,7 @@ public class DBManager{
     private DBHelpers helper;
     private SQLiteDatabase db;
     public DBManager(Context context){
-        helper = new DBHelpers(context);
+         helper = new DBHelpers(context);
         db = helper.getWritableDatabase();
     }
     public void insertSQL(RecordingUser user){
@@ -88,6 +88,37 @@ public class DBManager{
             db.endTransaction();
         }
     }
+    public void insertSQL(GreetingUser user){
+        db.beginTransaction();
+        try{
+            db.execSQL("insert into sleep(receive_user, send_user, greeting_text)" +
+                            " values(?,?,?)",
+                    new Object[]{user.getReceiveUser(),
+                            user.getSendUser(),
+                            user.getGreeting()});
+            db.setTransactionSuccessful();
+        }catch(SQLException E){
+            E.printStackTrace();
+        } finally{
+            db.endTransaction();
+        }
+    }
+    /*ScreenOffTime:记录用户屏幕关闭时间*/
+    public void insertSQL(ScreenOffUser user){
+        db.beginTransaction();
+        try{
+            db.execSQL("insert into screenOffTime(username, screenOffTime)" +
+                            " values(?,?)",
+                    new Object[]{user.getUsername(),
+                            user.getScreenOffTime()});
+            db.setTransactionSuccessful();
+        }catch(SQLException E){
+            E.printStackTrace();
+        } finally{
+            db.endTransaction();
+        }
+    }
+
     /*更新sqlUser中的值*/
     public void updateAppUser(AppUser user){
         db.beginTransaction();

@@ -21,7 +21,7 @@ public class ScreenListener {
         this.context = context;
         screenBroadcastReceiver = new ScreenBroadcastReceiver();
     }
-    private class ScreenBroadcastReceiver extends BroadcastReceiver{
+    public class ScreenBroadcastReceiver extends BroadcastReceiver{
         private String action = null;
         public void  onReceive(Context context, Intent intent){
             action = intent.getAction();

@@ -5,16 +5,25 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/ic_background">
-    <!-- padding 内边距   layout_margin 外边距  
-        android:layout_alignParentTop 布局的位置是否处于顶部 -->
-
+    <TextView
+        android:text="@string/inter_detector_text"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Inter_detector"
+        android:visibility="gone"
+        android:background="#FDEEDE"/>
     <RelativeLayout
         android:id="@+id/login_div"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="15dip"
         android:layout_margin="15dip"
+        android:layout_below="@+id/Inter_detector"
         android:background="@drawable/background_login_div_bg" >
+
         <!-- 账号 -->
         <TextView
             android:id="@+id/login_user_input"

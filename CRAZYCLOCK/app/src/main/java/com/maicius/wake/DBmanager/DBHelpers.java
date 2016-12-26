@@ -27,7 +27,7 @@ public class DBHelpers extends SQLiteOpenHelper {
                 "\tusername varchar(255),\n" +
                 "\tcur_time varchar(255),\n" +
                 "\tprimary key(sleep_time_id),\n" +
-                "\tforeign key(username) references sqlUser(username)\n" +
+                "\tforeign key(username) references appUser(username)\n" +
                 ")";
         db.execSQL(sql);
         sql = "create table getUpTime(\n" +
@@ -39,7 +39,7 @@ public class DBHelpers extends SQLiteOpenHelper {
         db.execSQL(sql);
         sql = "create table sleep(\n" +
                 "\tsleep_id int,\n" +
-                "\tusername varchar,\n" +
+                "\tusername varchar(255),\n" +
                 "\tsleep numeric(4,2),\n" +
                 "\tprimary key(sleep_id),\n" +
                 "\tforeign key(username) references appUser(username)\n" +
@@ -48,12 +48,29 @@ public class DBHelpers extends SQLiteOpenHelper {
         sql = "create table enableRecording(\n" +
                 "\tenable_id int primary key,\n" +
                 "\tusername varchar(255),\n" +
-                "\tenableSleep int,\n" +
+                "\tscreenOffTime int,\n" +
                 "\tforeign key(username) references appUser(username)\n" +
+                ")";
+        db.execSQL(sql);
+        sql = "create table greeting(\n" +
+                "\tgreeting_id int,\n" +
+                "\treceive_user varchar(255),\n" +
+                "\tsend_user varchar(255),\n" +
+                "\tgreeting_text varchar(255),\n" +
+                "\tforeign key(receive_user) references appUser(username),\n" +
+                "\tprimary key(greeting_id)\n" +
+                ")";
+        db.execSQL(sql);
+        sql ="create table screenOffTime(\n" +
+                "    time_id int,\n" +
+                "    username varchar(255),\n" +
+                "    screenOffTime varchar(255),\n" +
+                "    primary key(time_id)\n" +
                 ")";
         db.execSQL(sql);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        db.execSQL("DROP TABLE IF EXISTS greeting");
         db.execSQL("DROP TABLE IF EXISTS enableRecording");
         db.execSQL("DROP TABLE IF EXISTS sleepTime");
         db.execSQL("DROP TABLE IF EXISTS getUpTime");

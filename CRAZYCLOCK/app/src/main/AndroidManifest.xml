@@ -147,6 +147,11 @@
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
         </receiver>
+        <!--<receiver android:name="com.maicius.wake.web.ScreenListener$ScreenBroadcastReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
 
         <receiver android:name="com.maicius.wake.web.InternetBroadcastReceiver" >
             <intent-filter>
@@ -169,17 +174,21 @@
             android:label="睡眠时间" >
         </activity>
         <activity
+            android:name="com.maicius.wake.InterChange.ScreenOffList"
+            android:label="手机锁屏时间" >
+        </activity>
+        <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="com.maicius.wake.InterChange.FriendsList"
+            android:name="com.maicius.wake.Friends.FriendsList"
             android:label="我的好友" />
         <activity
-            android:name="com.maicius.wake.InterChange.FriendInfo"
+            android:name="com.maicius.wake.Friends.FriendInfo"
             android:label="好友信息" />
-        <activity android:name="com.maicius.wake.InterChange.AddFriend"
+        <activity android:name="com.maicius.wake.Friends.AddFriend"
             android:label="添加好友" />
     </application>
 
