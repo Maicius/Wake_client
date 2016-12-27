@@ -44,7 +44,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.maicius.wake.AboutUs.welcome"
             android:configChanges="orientation|keyboardHidden|keyboard|navigation"
             android:icon="@drawable/clock_launcher"
             android:label="@string/app_name"
@@ -77,6 +77,9 @@
         <activity
             android:name="com.maicius.wake.AboutUs.AboutUs"
             android:label="@string/about_us" />
+        <activity
+            android:name="com.maicius.wake.alarmClock.MainActivity"
+            android:label="@string/app_name" />
         <activity
             android:name="com.maicius.wake.InterChange.Notification"
             android:label="@string/wake_sure" />

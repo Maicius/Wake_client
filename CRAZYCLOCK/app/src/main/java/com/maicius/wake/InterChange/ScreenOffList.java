@@ -5,6 +5,9 @@ import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Switch;
@@ -26,6 +29,7 @@ public class ScreenOffList extends Activity{
     private String returnInfo;
    // private static Handler handler = new Handler();
     private ListView m_list;
+    private ImageView clear_button;
     private List<Map<String, Object>> listItems;
     private DBManager dbManager;
     protected void onCreate(Bundle savedInstanceState){
@@ -34,7 +38,16 @@ public class ScreenOffList extends Activity{
         dbManager = new DBManager(this);
         m_list = (ListView) findViewById(R.id.screen_off_list);
         listItems = new ArrayList<Map<String, Object>>();
+        clear_button = (ImageView)findViewById(R.id.clear_button);
+
         initList();
+        clear_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbManager.deleteAppUser("screenOffTime");
+                initList();
+            }
+        });
 
     }
     private void initList() {

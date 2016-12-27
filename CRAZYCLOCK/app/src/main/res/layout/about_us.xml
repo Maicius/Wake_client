@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/userspace_back"
+    android:weightSum="1">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="发送短信"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sendMsg"
+            android:layout_below="@+id/about_us"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="66dp" />
+
+        <TextView
+            android:text="感谢每一个下载此App的朋友\n
+由于一些时间和设计等原因\n
+导致它还存在着很多问题\n
+后面我们会继续完善\n
+另外\n
+
+我们期待着你的任何建议或批评\n
+点击下面按钮即可给我发送短信\n
+                     "
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/about_us"
+            android:layout_weight="0.31"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
+
+    </RelativeLayout>
+</LinearLayout>
