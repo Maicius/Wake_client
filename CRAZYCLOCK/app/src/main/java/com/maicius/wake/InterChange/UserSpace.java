@@ -240,7 +240,7 @@ public class UserSpace extends NetEventActivity {
                 long days = diff / (1000 * 60 * 60 * 24);
                 long hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
                 long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
-                Toast.makeText(this, "屏幕才关闭了"+minutes+"分钟", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "屏幕才关闭了"+minutes+"分钟", Toast.LENGTH_SHORT).show();
                 ScreenOffUser user = new
                         ScreenOffUser(MainActivity.s_userName, String.valueOf(minutes));
                 dbManager.insertSQL(user);

@@ -8,12 +8,42 @@
     tools:context="com.maicius.wake.InterChange.GetUpHistory"
     android:background="@drawable/ic_background_main">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timeList"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="true"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_centerVertical="true" />
+        android:weightSum="1"
+        android:layout_alignParentBottom="true">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:id="@+id/timeList"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.15" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_weight="1.15"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/curve"
+                android:src="@drawable/curve" />
+
+            <TextView
+                android:text="  曲线图"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:textSize="18dp"
+                android:id="@+id/textView10" />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

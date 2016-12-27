@@ -8,14 +8,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
+import com.maicius.wake.chart.IChart;
+import com.maicius.wake.chart.LineChart;
 import com.maicius.wake.web.WebService;
 
 public class GetUpHistory extends Activity {
@@ -26,6 +32,8 @@ public class GetUpHistory extends Activity {
     private static Handler m_handler = new Handler();
     private ProgressDialog m_proDialog;
     private String username;
+    private IChart m_chart = new LineChart();
+    static public ArrayList<String> times = new ArrayList<String>() ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +53,26 @@ public class GetUpHistory extends Activity {
         m_proDialog.setMessage("正在获取历史信息，请稍后...");
         m_proDialog.setCancelable(false);
         m_proDialog.show();
+
+        ImageView image_curve = (ImageView) findViewById(R.id.curve);
+
+        image_curve.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = null;
+                try {
+                    intent = m_chart.execute(m_list.getContext());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                startActivity(intent);
+            }
+        });
         //创建子线程
         new Thread(new MyThread()).start();
     }
 
     private void mInitList() {
+        times.clear();
         StringTokenizer st = new StringTokenizer(m_info, "#");
         int id = 0;
         while (st.hasMoreTokens()) {
@@ -61,6 +84,7 @@ public class GetUpHistory extends Activity {
                 map.put("ItemTitle", tmp);
                 map.put("ItemID", "记录" + id + ": ");
                 m_items.add(map);
+                times.add(tmp);
             }
         }
 
@@ -78,6 +102,7 @@ public class GetUpHistory extends Activity {
         public void run() {
             //m_info = WebService.executeHttpGet(MainActivity.s_userName,WebService.State.GetTimeList);
             m_info = WebService.executeHttpGet(username, WebService.State.GetTimeList);
+
             Log.v("sss", "login:" + m_info);
             m_handler.post(new Runnable() {
                 @Override

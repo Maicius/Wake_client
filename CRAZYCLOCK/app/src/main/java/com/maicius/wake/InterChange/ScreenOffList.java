@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Switch;
 
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.alarmClock.R;
@@ -53,7 +54,7 @@ public class ScreenOffList extends Activity{
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("ItemImage", R.drawable.ic_dialog_time);
                 map.put("ItemTitle", tmp);
-                map.put("ItemID", "时间：" + id + ": ");
+                map.put("ItemID", "锁屏时间" + id + ": ");
                 listItems.add(map);
             }
         }

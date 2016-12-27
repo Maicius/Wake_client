@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/my_space"
+            android:textColor="#000000"
             android:id="@+id/userspace_name"
             android:textSize="25sp"
             android:gravity="center_vertical|center_horizontal"
@@ -78,6 +79,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="起床记录"
+            android:textColor="#000000"
             android:layout_marginLeft="30dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="140dp"
@@ -98,6 +100,7 @@
 
         <TextView
             android:text="好友信息"
+            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/friendImageView"
@@ -120,6 +123,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="退出登录"
+            android:textColor="#000000"
             android:id="@+id/textView3"
             android:layout_marginRight="43dp"
             android:layout_alignParentBottom="true"
@@ -133,7 +137,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="个人信息"
-
+            android:textColor="#000000"
             android:id="@+id/textView2"
             android:layout_gravity="center"
             android:layout_alignBaseline="@+id/friendsTextView"
@@ -155,6 +159,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="返回闹钟"
+            android:textColor="#000000"
             android:id="@+id/return_main"
             android:layout_alignBaseline="@+id/textView3"
             android:layout_alignBottom="@+id/textView3"
@@ -166,7 +171,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="手机时间"
-
+            android:textColor="#000000"
             android:id="@+id/textView7"
             android:layout_gravity="center"
             android:layout_alignBaseline="@+id/textView2"
@@ -198,6 +203,7 @@
             android:text="睡眠历史"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:id="@+id/textView5"
             android:layout_below="@+id/sleep_history_image"
             android:layout_alignLeft="@+id/textView2"
@@ -217,6 +223,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
+            android:textColor="#000000"
             android:layout_below="@+id/sleep_history_image"
             android:layout_alignLeft="@+id/textView3"
             android:layout_alignStart="@+id/textView3" />
@@ -248,7 +255,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="关于我们"
-
+            android:textColor="#000000"
             android:id="@+id/about_us"
             android:layout_gravity="center"
             android:layout_below="@+id/aboutUs"

@@ -193,6 +193,7 @@
             android:label="好友信息" />
         <activity android:name="com.maicius.wake.Friends.AddFriend"
             android:label="添加好友" />
+        <activity android:name="org.achartengine.GraphicalActivity" />
     </application>
 
 </manifest>
