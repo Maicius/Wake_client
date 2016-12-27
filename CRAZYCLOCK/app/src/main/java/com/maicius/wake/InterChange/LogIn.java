@@ -43,7 +43,6 @@ public class LogIn extends NetEventActivity {
     private static Handler handler = new Handler();
     private TextView netStateView;
     public void onCreate(Bundle savedInstanceState) {
-        Log.v("maicius", "enter sign in");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
         netStateView = (TextView)findViewById(R.id.Inter_detector);
@@ -74,7 +73,7 @@ public class LogIn extends NetEventActivity {
                     raiseAlertDialog("提示","不能识别的手机号码");
                 }
                 else if(!netState){
-                    raiseAlertDialog("提示","没有检测到网络，请检查网络连接");
+                    raiseAlertDialog("提示","都说了没联网啊");
                 }
                 else {
                     dialog = new ProgressDialog(LogIn.this);
@@ -87,7 +86,6 @@ public class LogIn extends NetEventActivity {
                 }
             }
         });
-        //setContentView(R.layout.user_space);
     }
     public void onNetChange(int netState){
         super.onNetChange(netState);

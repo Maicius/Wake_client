@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Created by Maicius on 2016/12/21.
@@ -21,6 +22,8 @@ public class DBManager{
             db.execSQL("insert into enableRecording(username, enableSleep) values(?,?)",
                     new Object[]{user.getUsername(),
                             user.getEnableSleep()});
+            Log.w("database:",user.getUsername()+
+                    user.getEnableSleep());
             db.setTransactionSuccessful();
         }catch(SQLException E){
             E.printStackTrace();
@@ -36,6 +39,9 @@ public class DBManager{
                     new Object[]{user.getSqlusername(),
                             user.getSqlpassword(),
                             user.getSqlnickname()});
+            Log.w("database:",user.getSqlusername()+
+                    user.getSqlpassword()+
+                    user.getSqlnickname());
             db.setTransactionSuccessful();
         }catch(SQLException E){
             E.printStackTrace();
@@ -52,6 +58,8 @@ public class DBManager{
                             " values(?,?)",
                     new Object[]{user.getUsername(),
                             user.getCurTime()});
+            Log.w("database:",user.getUsername()+
+                    user.getCurTime());
             db.setTransactionSuccessful();
         }catch(SQLException E){
             E.printStackTrace();
@@ -67,6 +75,8 @@ public class DBManager{
                             " values(?,?)",
                     new Object[]{user.getUsername(),
                             user.getGetUpTime()});
+            Log.w("database:",user.getUsername()+
+                    user.getGetUpTime());
             db.setTransactionSuccessful();
         }catch(SQLException E){
             E.printStackTrace();
@@ -82,6 +92,8 @@ public class DBManager{
                     new Object[]{user.getSleepUsername(),
                             user.getSleepTime()});
             db.setTransactionSuccessful();
+            Log.w("database:",user.getSleepUsername()+
+                    user.getSleepTime());
         }catch(SQLException E){
             E.printStackTrace();
         } finally{
@@ -91,11 +103,14 @@ public class DBManager{
     public void insertSQL(GreetingUser user){
         db.beginTransaction();
         try{
-            db.execSQL("insert into sleep(receive_user, send_user, greeting_text)" +
+            db.execSQL("insert into greeting(receive_user, send_user, greeting_text)" +
                             " values(?,?,?)",
                     new Object[]{user.getReceiveUser(),
                             user.getSendUser(),
                             user.getGreeting()});
+            Log.w("database:",user.getReceiveUser()+
+                    user.getSendUser()+
+                    user.getGreeting());
             db.setTransactionSuccessful();
         }catch(SQLException E){
             E.printStackTrace();
@@ -143,10 +158,13 @@ public class DBManager{
 
     public Cursor query(String table){
         Cursor c = db.rawQuery("select * from "+table+"", null);
+        Log.w("maicius", c.getCount()+"table:"+table);
         return c;
     }
     public Cursor query(String col, String table){
+
         Cursor c = db.rawQuery("select "+col+" from "+table+"", null);
+        Log.w("maicius", c.getCount()+"table:"+table);
         return c;
     }
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.maicius.wake.Friends.FriendsList"
-    android:background="@drawable/ic_background2">
+    android:background="@drawable/ic_background_main">
 
     <ListView
         android:layout_width="match_parent"

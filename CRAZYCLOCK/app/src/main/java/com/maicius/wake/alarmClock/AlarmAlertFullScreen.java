@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -20,7 +21,12 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import com.maicius.wake.DBmanager.DBManager;
+import com.maicius.wake.DBmanager.GreetingUser;
+import com.maicius.wake.web.WebService;
+
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 /**
  * Alarm Clock alarm alert: pops visible indicator and plays alarm
@@ -33,7 +39,9 @@ public class AlarmAlertFullScreen extends Activity {
     private static final String DEFAULT_SNOOZE = "10";
     private static final String DEFAULT_VOLUME_BEHAVIOR = "2";
     protected static final String SCREEN_OFF = "screen_off";
-
+    private String greetingInfo;
+    private static Handler handler = new Handler();
+    private DBManager dbManager;
     protected Alarm mAlarm;
     private int mVolumeBehavior;
 
@@ -59,7 +67,7 @@ public class AlarmAlertFullScreen extends Activity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        dbManager = new DBManager(this);
         mAlarm = getIntent().getParcelableExtra(Alarms.ALARM_INTENT_EXTRA);
         //sign changed by reason
         mAlarm = Alarms.getAlarm(getContentResolver(), mAlarm.id);
@@ -224,23 +232,20 @@ public class AlarmAlertFullScreen extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.v("maicius", "AlarmAlert.onDestroy()");
         Calendar currentTime = Calendar.getInstance();
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
         //设置时间间隔为2分钟
-        if(hour<=12 && hour>=0) {
+        if(hour<=12 && hour>=0 && MainActivity.s_isLogged) {
             Intent intent = new Intent(AlarmAlertFullScreen.this, com.maicius.wake.InterChange.Notification.class);
             PendingIntent pi = PendingIntent.getActivity(AlarmAlertFullScreen.this, 0, intent, 0);
             int min = (int) (1 + Math.random() % 5);
             //Calendar currentTime = Calendar.getInstance();
             AlarmManager aManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            aManager.set(AlarmManager.RTC_WAKEUP, currentTime.getTimeInMillis() + 1000 * 10 * 1, pi);
-            Log.v("maicius", "Notification is set");
+            aManager.set(AlarmManager.RTC_WAKEUP, currentTime.getTimeInMillis() + 1000 * 60 * min, pi);
+            new Thread(new downloadGreeting()).start();
         }
         // No longer care about the alarm being killed.
         unregisterReceiver(mReceiver);
-        Log.v("maicius", "Notification will be raised after 2 min");
-
     }
 
     @Override
@@ -279,5 +284,26 @@ public class AlarmAlertFullScreen extends Activity {
         // Don't allow back to dismiss. This method is overriden by AlarmAlert
         // so that the dialog is dismissed.
         return;
+    }
+    public class downloadGreeting implements  Runnable {
+        public void run() {
+            greetingInfo = WebService.executeHttpGet
+                    (MainActivity.s_userName, WebService.State.GetGetUpTip);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    GreetingUser user;
+                    if (greetingInfo.equals("")) {
+                    }
+                    else {
+                        StringTokenizer st = new StringTokenizer(greetingInfo, "#");
+                        String greeting = st.nextToken();
+                        String send_user = st.nextToken();
+                        user = new GreetingUser(MainActivity.s_userName, send_user, greeting);
+                        dbManager.insertSQL(user);
+                    }
+                }
+            });
+        }
     }
 }

@@ -42,7 +42,6 @@ public class Register extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.v("maicius", "enter sign in");
         setContentView(R.layout.register);
         TextView Login = (TextView) findViewById(R.id.login);
         registerButton = (Button) findViewById(R.id.sign_up_button);
@@ -207,7 +206,7 @@ public class Register extends Activity {
 
   private void initSDK()
     {
-        //SMSSDK.initSDK(this, "App Key", "App Secret");
+        SMSSDK.initSDK(this, "19c7040399c28", "d841bc898669f9aaf419bc4f6d1ec8a6");
         EventHandler eventHandler = new EventHandler() {
             @Override
             public void afterEvent(int event, int result, Object data) {

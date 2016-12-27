@@ -3,8 +3,8 @@
     android:id="@+id/base_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
-    android:orientation="vertical"> 
+    android:background="@drawable/ic_background_main"
+    android:orientation="vertical">
 
     <LinearLayout android:id="@+id/add_alarm"
         android:clickable="true"
@@ -19,7 +19,8 @@
             android:duplicateParentState="true"
             android:gravity="center"
             android:scaleType="center"
-            android:src="@drawable/add_alarm" />
+            android:src="@drawable/ic_clock_strip_desk_clock"
+            android:id="@+id/add_icon" />
 
         <TextView
             android:duplicateParentState="true"
@@ -51,17 +52,10 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <ImageButton android:id="@+id/desk_clock_button"
-            style="@style/ButtonStripLeft"
-            android:layout_width="52dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_clock_strip_desk_clock"
-            android:contentDescription="@string/desk_clock_button_description" />
         <com.maicius.wake.alarmClock.DigitalClock
             style="@style/ButtonStripRight"
-            android:layout_width="289dp"
-            android:layout_height="97dp"
-            android:layout_weight="0.77">
+            android:layout_width="match_parent"
+            android:layout_height="97dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,9 +76,10 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="?android:attr/textColorPrimary"
                     android:layout_weight="0.48" />
+
                 <ImageButton
                     android:layout_width="71dp"
-                    android:layout_height="80dp"
+                    android:layout_height="match_parent"
                     android:id="@+id/sign_in"
                     android:src="@drawable/btn_login"
                     android:adjustViewBounds="false"

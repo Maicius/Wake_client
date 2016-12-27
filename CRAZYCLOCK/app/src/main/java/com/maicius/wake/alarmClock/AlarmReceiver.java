@@ -50,7 +50,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
 
         if (alarm == null) {
-            Log.v("wangxianming", "Failed to parse the alarm from the intent");
+            Log.v("sss", "Failed to parse the alarm from the intent");
             // Make sure we set the next alert if needed.
             Alarms.setNextAlert(context);
             return;
@@ -144,7 +144,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // If the alarm is null, just cancel the notification.
         if (alarm == null) {
             if (true) {
-                Log.v("wangxianming", "Cannot update notification for killer callback");
+                Log.v("sss", "Cannot update notification for killer callback");
             }
             return;
         }

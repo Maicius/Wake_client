@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/ic_background">
+    android:background="@drawable/userspace_back">
     <!-- padding 内边距   layout_margin 外边距
         android:layout_alignParentTop 布局的位置是否处于顶部 -->
 

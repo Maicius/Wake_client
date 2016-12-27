@@ -4,9 +4,9 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/ic_background">
+    android:background="@drawable/ic_background_main">
     <TextView
-        android:text="@string/inter_detector_text"
+        android:text="@string/inter_detector_text_2"
         android:textSize="12sp"
         android:gravity="center"
         android:textColor="#000000"

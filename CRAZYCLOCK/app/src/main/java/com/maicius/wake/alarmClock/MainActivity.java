@@ -2,11 +2,7 @@ package com.maicius.wake.alarmClock;
 /**
  * MainActivity
  */
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.*;
 import android.content.Context;
@@ -16,7 +12,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,18 +29,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maicius.wake.DBmanager.DBManager;
-import com.maicius.wake.DBmanager.ScreenOffUser;
-import com.maicius.wake.DBmanager.ScreenUser;
-import com.maicius.wake.DBmanager.SyncDatabase;
 import com.maicius.wake.InterChange.LogIn;
-import com.maicius.wake.InterChange.SleepHistory;
 import com.maicius.wake.InterChange.UserSpace;
-import com.maicius.wake.web.ScreenListener;
-
-import cn.smssdk.SMSSDK;
 
 public class MainActivity extends Activity implements OnItemClickListener {
 
@@ -69,15 +56,14 @@ public class MainActivity extends Activity implements OnItemClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //初始化Mob SDK
-        SMSSDK.initSDK(this, "19c7040399c28", "d841bc898669f9aaf419bc4f6d1ec8a6");
+
         //取自定义布局的LayoutInflater
         mFactory = LayoutInflater.from(this);
         //取getSharedPreferences中key==“AlarmClock”的值
         mPrefs = getSharedPreferences(PREFERENCES, 0);
         //获取闹钟的cursor
         mCursor = Alarms.getAlarmsCursor(getContentResolver());
-        dbManager = new DBManager(MainActivity.this);
+        dbManager = new DBManager(this);
 
         //enableSleepTime();
         //更新布局界面
@@ -110,13 +96,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
         signIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SignIn();
-            }
-        });
-        ImageButton deskClock =
-                (ImageButton) findViewById(R.id.desk_clock_button);
-        deskClock.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
             }
         });
     }
@@ -383,9 +362,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //dbManager = new DBManager(MainActivity.this);
         UserSpace userSpace = new UserSpace();
         userSpace.disableSleepTime();
-        dbManager.deleteAppUser("sleepTime");
+        //dbManager.deleteAppUser("sleepTime");
         ToastMaster.cancelToast();
         mCursor.close();
         dbManager.close();

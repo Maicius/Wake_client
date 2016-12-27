@@ -38,25 +38,25 @@ public class UserSpace extends NetEventActivity {
 
     private TextView netStateView;
     private DBManager dbManager;
-    private SyncDatabase.MyBinder myBinder;
+    SimpleDateFormat format;
+    //private SyncDatabase.MyBinder myBinder;
     private ScreenListener screenListener;
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            myBinder = (SyncDatabase.MyBinder)service;
-            myBinder.uploadData();
-            myBinder.downloadGreeting();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
+//    private ServiceConnection connection = new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName name, IBinder service) {
+//            myBinder = (SyncDatabase.MyBinder)service;
+//            myBinder.uploadData();
+//            myBinder.downloadGreeting();
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName name) {
+//
+//        }
+//    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.v("sss", "******************enter user space!");
         setContentView(R.layout.user_space);
         netStateView = (TextView)findViewById(R.id.InterDetector);
         dbManager = new DBManager(this);
@@ -178,37 +178,34 @@ public class UserSpace extends NetEventActivity {
             }
         });
     }
-    private void startSyncDatabase() {
-        Intent startIntent = new Intent(this, SyncDatabase.class);
-        startService(startIntent);
-        Intent bindIntent = new Intent(this, SyncDatabase.class);
-        bindService(bindIntent, connection, BIND_AUTO_CREATE);
-    }
-    private void StopSyncDatabse(){
-        Intent stopIntent = new Intent(this, SyncDatabase.class);
-        stopService(stopIntent);
-        unbindService(connection);
-    }
+//    private void startSyncDatabase() {
+//        Intent startIntent = new Intent(this, SyncDatabase.class);
+//        startService(startIntent);
+//        Intent bindIntent = new Intent(this, SyncDatabase.class);
+//        bindService(bindIntent, connection, BIND_AUTO_CREATE);
+//    }
+//    private void StopSyncDatabse(){
+//        Intent stopIntent = new Intent(this, SyncDatabase.class);
+//        stopService(stopIntent);
+//        unbindService(connection);
+//    }
     public void enableSleepTime(){
 
         screenListener.begin(new ScreenListener.ScreenStateListener() {
             @Override
             public void onScreenOn() {
-
-                //Toast.makeText(UserSpace.this, "距离上次关闭手机不到10分钟，玩你麻痹手机，快去学习", Toast.LENGTH_LONG).show();
-                //insertCurrentTime();
                 computeOffTime();
             }
             @Override
             public void onScreenOff() {
-                Log.w("sss", "ScrenOff");
+
                 insertCurrentTime();
             }
 
             @Override
             public void onUserPresent() {
                 //computeOffTime();
-                Log.w("sss", "ScrenPresent");
+
             }
         });
     }
@@ -216,25 +213,23 @@ public class UserSpace extends NetEventActivity {
         screenListener.unregisterListener();
     }
     private void insertCurrentTime(){
-        SimpleDateFormat format =
+        format =
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date curTime = new Date(System.currentTimeMillis());
         String curSleepTime = format.format(curTime);
         ScreenUser user =
                 new ScreenUser(MainActivity.s_userName, curSleepTime);
         dbManager.insertSQL(user);
-        Log.w("sss", "ScrenOff"+curSleepTime);
+        //Log.w("sss", "ScrenOff"+curSleepTime);
     }
     private void computeOffTime(){
+        format =
+                new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Cursor sleepTimeCur = dbManager.query("sleepTime");
         //Toast.makeText(this, "屏幕才关闭了", Toast.LENGTH_LONG).show();
-        Log.w("sss", "Enter computing Time");
         if (sleepTimeCur.getCount() != 0) {
             sleepTimeCur.moveToLast();
             String lastOffTime = sleepTimeCur.getString(2);
-            Log.w("sss", "Last off time"+lastOffTime);
-            SimpleDateFormat format =
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date curTime = new Date(System.currentTimeMillis());
             String OnTime = format.format(curTime);
             try {
@@ -245,11 +240,10 @@ public class UserSpace extends NetEventActivity {
                 long days = diff / (1000 * 60 * 60 * 24);
                 long hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
                 long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
-                Toast.makeText(this, "屏幕才关闭了"+minutes+"分钟", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "屏幕才关闭了"+minutes+"分钟", Toast.LENGTH_SHORT).show();
                 ScreenOffUser user = new
                         ScreenOffUser(MainActivity.s_userName, String.valueOf(minutes));
                 dbManager.insertSQL(user);
-                Log.w("sss", "OFF TIME"+minutes);
             }catch(ParseException e){
                 e.printStackTrace();
             }

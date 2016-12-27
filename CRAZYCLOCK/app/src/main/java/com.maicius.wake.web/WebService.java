@@ -38,8 +38,8 @@ public class WebService extends Activity{
     //private static String IP = "192.168.191.1:8080";
     //private static String IP = "192.168.1.135:8080";     //服务器程序基址
     //private static String IP = "192.168.191.1:8080";             //本地测试地址
-    private static String base = "http://" + IP ;   //本地程序基址
-
+    //private static String base = "http://" + IP +"/HelloWeb";   //本地程序基址
+   private static String base = "http://" + IP ;
     /**
      * DoGet
      */

@@ -6,17 +6,22 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.DBmanager.GetUpUser;
+import com.maicius.wake.DBmanager.GreetingUser;
 import com.maicius.wake.DBmanager.ScreenUser;
 import com.maicius.wake.DBmanager.SleepUser;
+import com.maicius.wake.DBmanager.SyncDatabase;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.web.ConnectionDetector;
 import com.maicius.wake.web.WebService;
@@ -31,17 +36,16 @@ public class Notification extends Activity {
     String greeting, greeting_sender;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Activity.onCreate(savedInstanceState);
+        dbManager = new DBManager(this);
         Cursor c = dbManager.query("greeting");
         if(c.getCount()!=0) {
-            c.moveToFirst();
+            c.moveToLast();
             greeting = c.getString(3);
             greeting_sender ="From:"+ c.getString(2);
         }else{
-            greeting = "温馨提醒";
-            greeting_sender = "喂，起床了吗？";
+            greeting = "喂，起床了吗？";
+            greeting_sender = "温馨提醒";
         }
-        Log.v("maicius", "Notification Entered******************");
         AlertDialog.Builder dialog = new AlertDialog.Builder(Notification.this);
         dialog.setTitle(greeting_sender).setMessage(greeting);
 
@@ -80,7 +84,6 @@ public class Notification extends Activity {
             }
 
             computeTimeDiff();
-            Log.v("sss", info + "***");
             proDialog.dismiss();
         }
     }
@@ -88,26 +91,24 @@ public class Notification extends Activity {
     private void computeTimeDiff() {
         String sleepTime;
         DBManager dbManager = new DBManager(this);
+        SimpleDateFormat format =
+                new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
             Cursor sleepTimeCur = dbManager.query("sleepTime");
             if (sleepTimeCur.getCount() != 0) {
-                sleepTimeCur.moveToFirst();//用户最后一次解锁时间
-                sleepTimeCur.moveToNext();//用户最后一次解锁时间之后的第一次屏幕关闭时间
+                sleepTimeCur.moveToLast();//用户最后一次关闭屏幕时间
                 sleepTime = sleepTimeCur.getString(2);
             }
             else{
                 Calendar currentTime = Calendar.getInstance();
                 currentTime.add(Calendar.DAY_OF_MONTH, -1);
-                int year = currentTime.get(Calendar.YEAR);
-                int month = currentTime.get(Calendar.MONTH);
-                int day = currentTime.get(Calendar.DAY_OF_MONTH);
-                int hour = 21;
-                int minute = 10;
-                int second = 10;
-                sleepTime = year+"-"+month+"-"+day+"-"+" "+hour+":"+minute+":"+second;
+                Date date = currentTime.getTime();
+                date.setHours(21);
+                date.setMinutes(10);
+                date.setSeconds(10);
+
+                sleepTime = format.format(date);
             }
-            SimpleDateFormat format =
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date curTime = new Date(System.currentTimeMillis());
             String getUptime = format.format(curTime);
             Date t1=format.parse(getUptime);
@@ -120,7 +121,6 @@ public class Notification extends Activity {
             if(ConnectionDetector.getNetworkState(Notification.this)!=-1) {
                 String info = WebService.executeHttpGet(hours,
                         WebService.State.SleepTime);
-                Log.v("sleepTimeInfo", info + "***");
             }
             else {
                 SleepUser sleepUser = new SleepUser(MainActivity.s_userName, hours);
