@@ -39,7 +39,7 @@ public class WebService extends Activity{
     //private static String IP = "192.168.1.135:8080";     //服务器程序基址
     //private static String IP = "192.168.191.1:8080";             //本地测试地址
     //private static String base = "http://" + IP +"/HelloWeb";   //本地程序基址
-   private static String base = "http://" + IP ;
+   private static String base = "http://" + IP;
     /**
      * DoGet
      */
@@ -163,7 +163,11 @@ public class WebService extends Activity{
                 break;
         }
         //为了重用，如果是查找好友，第一个参数是指输入的昵称，第二个参数是指输入的用户名即电话
-        path += "?userName=" + userName + "&friendName=" + friendName;
+        try {
+            path += "?userName=" + URLEncoder.encode(userName,"UTF-8") + "&friendName=" + URLEncoder.encode(friendName, "UTF-8");
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
         return doHttpGet(path);
     }
 

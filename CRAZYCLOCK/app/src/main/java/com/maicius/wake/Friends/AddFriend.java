@@ -22,6 +22,7 @@ import com.maicius.wake.web.WebService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class AddFriend extends Activity implements ActionBar.TabListener, ContactInfoFragment.CallBackValue,
         ConditionSearchFriend.CallBackInputValue {
@@ -266,6 +267,9 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
                 }
             });
         }
+    }
+    private boolean isUserName(String username){
+        return Pattern.matches("[1][3578]\\d{9}", username);
     }
 
 }
