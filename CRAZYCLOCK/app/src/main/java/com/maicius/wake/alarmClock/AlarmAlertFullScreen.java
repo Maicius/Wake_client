@@ -235,7 +235,6 @@ public class AlarmAlertFullScreen extends Activity {
         Calendar currentTime = Calendar.getInstance();
         int hour = currentTime.get(Calendar.HOUR_OF_DAY);
         //设置时间间隔为2分钟
-        if(hour<=12 && hour>=0 && MainActivity.s_isLogged) {
             Intent intent = new Intent(AlarmAlertFullScreen.this, com.maicius.wake.InterChange.Notification.class);
             PendingIntent pi = PendingIntent.getActivity(AlarmAlertFullScreen.this, 0, intent, 0);
             int min = (int) (1 + Math.random() % 5);
@@ -243,7 +242,6 @@ public class AlarmAlertFullScreen extends Activity {
             AlarmManager aManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             aManager.set(AlarmManager.RTC_WAKEUP, currentTime.getTimeInMillis() + 1000 * 60 * min, pi);
             new Thread(new downloadGreeting()).start();
-        }
         // No longer care about the alarm being killed.
         unregisterReceiver(mReceiver);
     }
