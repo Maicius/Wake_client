@@ -118,9 +118,17 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
         this.nickName = nickName;
         this.phone = phone;
         //warningDialog.show();
-        dialog.setMessage("正在查找，请稍后...");
-        dialog.show();
-        new Thread(new SearchFriendThread()).start();
+        if (nickName.equals("") && phone.equals("")) {
+            raiseAlertDialog("提示","昵称和手机号码不能同时为空");
+        } else if (!nickName.equals("") && !isNickName(nickName)) {
+            raiseAlertDialog("提示","非法的昵称");
+        } else if (!phone.equals("") && !isPhoneNum(phone)) {
+            raiseAlertDialog("提示", "不能识别的手机号码");
+        } else {
+            dialog.setMessage("正在查找，请稍后...");
+            dialog.show();
+            new Thread(new SearchFriendThread()).start();
+        }
     }
 
     public SerializableMap getContactsInfo() {
@@ -268,8 +276,27 @@ public class AddFriend extends Activity implements ActionBar.TabListener, Contac
             });
         }
     }
-    private boolean isUserName(String username){
+
+    private boolean isPhoneNum(String username){
         return Pattern.matches("[1][3578]\\d{9}", username);
     }
 
+    private boolean isNickName(String nickname) {
+        //return Pattern.matches("^[\\u4E00-\\u9FA5A-Za-z0-9_]+$", nickname);
+        if (nickname.length() > 16)
+            return false;
+        return true;
+    }
+
+
+    private void raiseAlertDialog(String title, String message){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AddFriend.this);
+        alertDialog.setTitle(title).setMessage(message);
+        alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alertDialog.create().show();
+    }
 }
