@@ -107,15 +107,25 @@ public class WebService extends Activity{
     /**
      * 上传起床时间
      */
+    public static String executeHttpGet(long hour, String date, State state){
+        String path="";
+        switch (state) {
+            case SleepTime:
+                path = base + "/SleepTime";
+                break;
+        }
+
+        path = path + "?username=" + MainActivity.s_userName + "&hour=" + String.valueOf(hour)
+                +"&date="+date;
+        return doHttpGet(path);
+
+    }
     public static String executeHttpGet(long date, State state) {
 
         String path="";
         switch (state) {
             case GetUpTime:
                 path = base + "/GetUpTime";
-                break;
-            case SleepTime:
-                path = base + "/SleepTime";
                 break;
         }
 

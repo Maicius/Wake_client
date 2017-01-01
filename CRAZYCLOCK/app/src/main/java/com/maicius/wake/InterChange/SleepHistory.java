@@ -93,7 +93,7 @@ public class SleepHistory extends Activity {
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("ItemImage", R.drawable.ic_dialog_time);
                 map.put("ItemTitle", tmp);
-                map.put("ItemID", "时间：" + id + ": ");
+                map.put("ItemID", "时间" + id + ": ");
                 listItems.add(map);
             }
         }

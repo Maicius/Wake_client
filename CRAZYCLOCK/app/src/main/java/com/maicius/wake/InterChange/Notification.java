@@ -90,9 +90,11 @@ public class Notification extends Activity {
 
     private void computeTimeDiff() {
         String sleepTime;
+        String sleepDate;
         DBManager dbManager = new DBManager(this);
         SimpleDateFormat format =
                 new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dateForm = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Cursor sleepTimeCur = dbManager.query("sleepTime");
             if (sleepTimeCur.getCount() != 0) {
@@ -100,6 +102,7 @@ public class Notification extends Activity {
                 sleepTime = sleepTimeCur.getString(2);
             }
             else{
+
                 Calendar currentTime = Calendar.getInstance();
                 currentTime.add(Calendar.DAY_OF_MONTH, -1);
                 Date date = currentTime.getTime();
@@ -109,17 +112,20 @@ public class Notification extends Activity {
 
                 sleepTime = format.format(date);
             }
+
+
             Date curTime = new Date(System.currentTimeMillis());
             String getUptime = format.format(curTime);
             Date t1=format.parse(getUptime);
             Date t2 = format.parse(sleepTime);
+            sleepDate = dateForm.format(t2);
             long diff = t1.getTime()-t2.getTime();
 
             long days = diff / (1000 * 60 * 60 * 24);
             long hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
             //long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
             if(ConnectionDetector.getNetworkState(Notification.this)!=-1) {
-                String info = WebService.executeHttpGet(hours,
+                WebService.executeHttpGet(hours,sleepDate,
                         WebService.State.SleepTime);
             }
             else {

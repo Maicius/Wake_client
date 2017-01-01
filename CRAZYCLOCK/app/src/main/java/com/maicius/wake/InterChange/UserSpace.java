@@ -94,14 +94,14 @@ public class UserSpace extends NetEventActivity {
         }else{
             netStateView.setVisibility(View.GONE);
             Cursor sleepTable = dbManager.query("sleep");
-            Toast.makeText(this, "SleepTable"+sleepTable.getCount(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "SleepTable"+sleepTable.getCount(),Toast.LENGTH_SHORT).show();
             if(sleepTable.getCount() !=0) {
                 Log.w("debug","bind start");
                 //Intent bindIntent = new Intent(this, SyncDatabase.class);
                 //bindService(bindIntent, connection, BIND_AUTO_CREATE);
             }
             else{
-                Toast.makeText(this, "bind end",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "bind end",Toast.LENGTH_SHORT).show();
                 Log.w("debug","service end");
             }
         }

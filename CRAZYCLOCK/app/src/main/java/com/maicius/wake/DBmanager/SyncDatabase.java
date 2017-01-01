@@ -32,7 +32,7 @@ public class SyncDatabase extends Service{
     @Override
     public void onCreate(){
         super.onCreate();
-        Toast.makeText(SyncDatabase.this, "我在后台偷流量了", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SyncDatabase.this, "我在后台偷流量了", Toast.LENGTH_SHORT).show();
     }
     public int onStartCommand(Intent intent, int flags, int startId){
         return super.onStartCommand(intent, flags, startId);

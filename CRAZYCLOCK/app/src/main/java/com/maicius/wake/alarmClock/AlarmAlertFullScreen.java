@@ -178,7 +178,7 @@ public class AlarmAlertFullScreen extends Activity {
         String displayTime = getString(R.string.alarm_alert_snooze_set,
                 snoozeMinutes);
         // Intentionally log the snooze time for debugging.
-        Log.v("maicius", " AlarmAlertFullScreen"+displayTime);
+        //Log.v("maicius", " AlarmAlertFullScreen"+displayTime);
 
         // Display the snooze minutes in a toast.
         Toast.makeText(AlarmAlertFullScreen.this, displayTime,

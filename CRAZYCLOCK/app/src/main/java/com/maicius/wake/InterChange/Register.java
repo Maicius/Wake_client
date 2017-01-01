@@ -78,6 +78,9 @@ public class Register extends Activity {
                         || passwordText.getText().toString().length()>16){
                     raiseAlertDialog("提示","密码长度必须在6-16位之间");
                 }
+                else if(nicknameText.getText().toString().length()>12) {
+                    raiseAlertDialog("提示", "用户名不能长于12位哦");
+                }
                 else{
                     new AlertDialog.Builder(Register.this)
                             .setTitle("发送短信")
@@ -134,7 +137,8 @@ public class Register extends Activity {
                     raiseAlertDialog("提示","密码长度必须在6-16位之间");
                 }
                 else if(verCodeText.getText().toString().length() != 4)
-                {raiseAlertDialog("提示","请输入4位验证码");
+                {
+                    raiseAlertDialog("提示","请输入4位验证码");
                 }
                 else{
                     SMSSDK.submitVerificationCode("86", userPhone, verCodeText.getText().toString());
