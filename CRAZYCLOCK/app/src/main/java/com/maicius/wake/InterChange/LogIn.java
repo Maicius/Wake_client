@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.maicius.wake.DBmanager.AppUser;
 import com.maicius.wake.DBmanager.DBManager;
-import com.maicius.wake.DBmanager.SyncDatabase;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.web.ConnectionDetector;

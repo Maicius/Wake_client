@@ -87,13 +87,14 @@ public class DBManager{
     public void insertSQL(SleepUser user){
         db.beginTransaction();
         try{
-            db.execSQL("insert into sleep(username, sleep)" +
-                            " values(?,?)",
+            db.execSQL("insert into sleep(username, sleep, day)" +
+                            " values(?,?,?)",
                     new Object[]{user.getSleepUsername(),
-                            user.getSleepTime()});
+                            user.getSleepTime(),
+                            user.getDay()});
             db.setTransactionSuccessful();
             Log.w("database:",user.getSleepUsername()+
-                    user.getSleepTime());
+                    user.getSleepTime()+"day:"+user.getDay());
         }catch(SQLException E){
             E.printStackTrace();
         } finally{
@@ -149,8 +150,10 @@ public class DBManager{
         String sql = "delete from " + table +" where 1=1";
         db.execSQL(sql);
     }
-    public void deleteData(String table, String col, String key){
-        String sql = "delete from " + table +" where "+col+" =key";
+    public void deleteData(String table, String col, int key){
+        String sql = "delete from " + table +" where "+col+" = "+key;
+
+        db.execSQL(sql);
     }
     public void close(){
         db.close();

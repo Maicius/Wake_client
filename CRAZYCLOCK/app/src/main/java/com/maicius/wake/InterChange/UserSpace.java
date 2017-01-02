@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
@@ -22,13 +23,13 @@ import com.maicius.wake.AboutUs.AboutUs;
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.DBmanager.ScreenOffUser;
 import com.maicius.wake.DBmanager.ScreenUser;
-import com.maicius.wake.DBmanager.SyncDatabase;
 import com.maicius.wake.Friends.FriendsList;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.web.ConnectionDetector;
 import com.maicius.wake.web.NetEventActivity;
 import com.maicius.wake.web.ScreenListener;
+import com.maicius.wake.web.WebService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,14 @@ public class UserSpace extends NetEventActivity {
 
     private TextView netStateView;
     private DBManager dbManager;
+    private DBManager dbManagerSleep, dbManagerGetup;
     SimpleDateFormat format;
+    Cursor cursorSleep, cursorGetUp;
+    String SleepReturn, getupReturn;
+    int sleep_id, getup_id;
+    long sleep;
+    String day,getUpTime;
+    private static Handler handler = new Handler();
     //private SyncDatabase.MyBinder myBinder;
     private ScreenListener screenListener;
 //    private ServiceConnection connection = new ServiceConnection() {
@@ -76,12 +84,64 @@ public class UserSpace extends NetEventActivity {
                 //Intent stopIntent = new Intent(this, SyncDatabase.class);
                 //stopService(stopIntent);
             //}
+            new Thread(new uploadSleepData()).start();
+            new Thread(new uploadGetUpData()).start();
             netStateView.setVisibility(View.GONE);
         }else{
             netStateView.setVisibility(View.VISIBLE);
         }
+
         mInitUI();
 
+    }
+    public class uploadGetUpData implements Runnable{
+        public void run(){
+                dbManagerGetup = new DBManager(UserSpace.this);
+                cursorGetUp = dbManagerGetup.query("getUpTime");
+                //cursor.moveToFirst();
+                if(cursorGetUp.getCount() !=0){
+                    cursorGetUp.moveToFirst();
+                    Log.w("DebugGetUpTime","同步数据中"+cursorGetUp.getInt(0));
+                    getup_id = cursorGetUp.getInt(0);
+                    getUpTime = cursorGetUp.getString(2);
+                    getupReturn = WebService.executeHttpGet(getUpTime);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+//                            Toast.makeText(UserSpace.this, "getUpTime:"
+//                                    + cursorGetUp.getCount(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dbManagerGetup.deleteAppUser("getUpTime");
+                    Log.w("DebugSleepTime","同步数据完成"+cursorGetUp.getCount());
+                }
+        }
+    }
+    public class uploadSleepData implements Runnable{
+        public void run(){
+            dbManagerSleep = new DBManager(UserSpace.this);
+            cursorSleep = dbManagerSleep.query("sleep");
+
+            if(cursorSleep.getCount() !=0){
+                cursorSleep.moveToFirst();
+                Log.w("DebugSleepTime","同步数据中"+cursorSleep.getInt(0));
+                sleep_id = cursorSleep.getInt(0);
+                sleep = cursorSleep.getLong(2);
+                day = cursorSleep.getString(3);
+                SleepReturn = WebService.executeHttpGet(sleep,day,
+                        WebService.State.SleepTime);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+//                        Toast.makeText(UserSpace.this, "Sleep:"
+//                        + cursorSleep.getCount(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Log.w("DebugSleepTime","同步数据完成"+cursorSleep.getCount());
+                dbManagerSleep.deleteAppUser("sleep");
+
+            }
+        }
     }
     public void onNetChange(int netState){
         super.onNetChange(netState);
@@ -92,18 +152,16 @@ public class UserSpace extends NetEventActivity {
             //stopService(stopIntent);
             //unbindService(connection);
         }else{
-            netStateView.setVisibility(View.GONE);
             Cursor sleepTable = dbManager.query("sleep");
-            //Toast.makeText(this, "SleepTable"+sleepTable.getCount(),Toast.LENGTH_SHORT).show();
             if(sleepTable.getCount() !=0) {
                 Log.w("debug","bind start");
-                //Intent bindIntent = new Intent(this, SyncDatabase.class);
-                //bindService(bindIntent, connection, BIND_AUTO_CREATE);
+                new Thread(new uploadSleepData()).start();
             }
-            else{
-                //Toast.makeText(this, "bind end",Toast.LENGTH_SHORT).show();
-                Log.w("debug","service end");
+            Cursor getUpTable = dbManager.query("getUpTime");
+            if(getUpTable.getCount() !=0){
+                new Thread(new uploadGetUpData()).start();
             }
+            netStateView.setVisibility(View.GONE);
         }
     }
 
@@ -166,7 +224,7 @@ public class UserSpace extends NetEventActivity {
                 dbManager.deleteAppUser("sleepTime");
                 dbManager.deleteAppUser("greeting");
                 dbManager.deleteAppUser("appUser");
-                //StopSyncDatabse();
+                dbManager.close();
                 disableSleepTime();
 
                 UserSpace.this.finish();

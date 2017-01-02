@@ -240,7 +240,7 @@ public class AlarmAlertFullScreen extends Activity {
             int min = (int) (1 + Math.random() % 5);
             //Calendar currentTime = Calendar.getInstance();
             AlarmManager aManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            aManager.set(AlarmManager.RTC_WAKEUP, currentTime.getTimeInMillis() + 1000 * 60 * min, pi);
+            aManager.set(AlarmManager.RTC_WAKEUP, currentTime.getTimeInMillis() + 1000 * 10 * 1, pi);
             new Thread(new downloadGreeting()).start();
         // No longer care about the alarm being killed.
         unregisterReceiver(mReceiver);

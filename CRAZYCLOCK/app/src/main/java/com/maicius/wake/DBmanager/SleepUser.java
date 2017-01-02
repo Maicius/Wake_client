@@ -7,12 +7,17 @@ package com.maicius.wake.DBmanager;
 public class SleepUser {
     private String sleepUsername;
     private long sleepTime;
-    public SleepUser(String username, long sleepTime){
+    private String day;
+    public SleepUser(String username, long sleepTime, String day){
         this.sleepUsername = username;
         this.sleepTime = sleepTime;
+        this.day = day;
     }
     public long getSleepTime(){
         return sleepTime;
+    }
+    public String getDay(){
+        return day;
     }
     public String getSleepUsername(){
         return sleepUsername;

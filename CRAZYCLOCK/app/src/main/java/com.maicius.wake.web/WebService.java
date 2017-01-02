@@ -120,16 +120,12 @@ public class WebService extends Activity{
         return doHttpGet(path);
 
     }
-    public static String executeHttpGet(long date, State state) {
+    public static String executeHttpGet(String date) {
 
-        String path="";
-        switch (state) {
-            case GetUpTime:
-                path = base + "/GetUpTime";
-                break;
-        }
+        String path;
+        path = base + "/GetUpTime";
 
-        path = path + "?username=" + MainActivity.s_userName + "&date=" + String.valueOf(date);
+        path = path + "?username=" + MainActivity.s_userName + "&date=" + date;
         return doHttpGet(path);
 
     }

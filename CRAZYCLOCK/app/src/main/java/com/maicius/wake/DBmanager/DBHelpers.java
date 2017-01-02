@@ -40,7 +40,8 @@ public class DBHelpers extends SQLiteOpenHelper {
         sql = "create table sleep(\n" +
                 "\tsleep_id int,\n" +
                 "\tusername varchar(255),\n" +
-                "\tsleep numeric(4,2),\n" +
+                "\tsleep varchar(255),\n" +
+                "\tday varchar(255),\n" +
                 "\tprimary key(sleep_id),\n" +
                 "\tforeign key(username) references appUser(username)\n" +
                 ")";

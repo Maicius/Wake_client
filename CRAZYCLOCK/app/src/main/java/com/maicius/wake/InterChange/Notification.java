@@ -18,10 +18,9 @@ import java.util.StringTokenizer;
 
 import com.maicius.wake.DBmanager.DBManager;
 import com.maicius.wake.DBmanager.GetUpUser;
-import com.maicius.wake.DBmanager.GreetingUser;
-import com.maicius.wake.DBmanager.ScreenUser;
+
 import com.maicius.wake.DBmanager.SleepUser;
-import com.maicius.wake.DBmanager.SyncDatabase;
+
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.web.ConnectionDetector;
 import com.maicius.wake.web.WebService;
@@ -76,7 +75,7 @@ public class Notification extends Activity {
             String info="";
             if(ConnectionDetector.getNetworkState(Notification.this) !=-1) {
                 info = WebService.executeHttpGet
-                        (currentTime.getTimeInMillis(), WebService.State.GetUpTime);
+                        (String.valueOf(currentTime.getTimeInMillis()));
             }else{
                 GetUpUser getUpUser = new
                         GetUpUser(MainActivity.s_userName, String.valueOf(currentTime.getTimeInMillis()));
@@ -129,7 +128,7 @@ public class Notification extends Activity {
                         WebService.State.SleepTime);
             }
             else {
-                SleepUser sleepUser = new SleepUser(MainActivity.s_userName, hours);
+                SleepUser sleepUser = new SleepUser(MainActivity.s_userName, hours, sleepDate);
                 dbManager.insertSQL(sleepUser);
             }
         }catch(ParseException e){
