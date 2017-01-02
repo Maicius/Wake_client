@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/userspace_back">
+    <TextView
+        android:text="Sorry \n
+本功能正在建设中\n
+这是一个排行榜\n
+你将可以方便的看到\n
+好友们的起床时间等信息的排名\n
+还可以约朋友一起早起\n
+或者一起睡懒觉\n
+                     "
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rank_tip"
+        android:layout_weight="0.31"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

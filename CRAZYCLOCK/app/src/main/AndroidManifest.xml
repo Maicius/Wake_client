@@ -75,6 +75,9 @@
             android:name="com.maicius.wake.InterChange.Register"
             android:label="@string/login_label_sign_up" />
         <activity
+            android:name="com.maicius.wake.InterChange.rank"
+            android:label="@string/rank" />
+        <activity
             android:name="com.maicius.wake.AboutUs.AboutUs"
             android:label="@string/about_us" />
         <activity

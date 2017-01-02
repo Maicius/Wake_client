@@ -44,18 +44,18 @@
             android:id="@+id/userspace_name"
             android:textSize="25sp"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_below="@+id/InterDetector"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
 
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="434dp"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -191,7 +191,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rank"
+            android:id="@+id/rank_image"
             android:src="@drawable/rank"
             android:layout_gravity="right"
             android:layout_alignBottom="@+id/getUpTime"
@@ -208,15 +208,6 @@
             android:layout_below="@+id/sleep_history_image"
             android:layout_alignLeft="@+id/textView2"
             android:layout_alignStart="@+id/textView2" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/sleep_history_image"
-            android:src="@drawable/sleep_history_icon"
-            android:layout_gravity="center"
-            android:layout_alignBottom="@+id/rank"
-            android:layout_centerHorizontal="true" />
 
         <TextView
             android:text="我的排行"
@@ -261,6 +252,16 @@
             android:layout_below="@+id/aboutUs"
             android:layout_alignLeft="@+id/textView2"
             android:layout_alignStart="@+id/textView2" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sleep_history_image"
+            android:src="@drawable/sleep_history_icon"
+            android:layout_gravity="center"
+            android:layout_alignBottom="@+id/rank_image"
+            android:layout_alignLeft="@+id/userInfo"
+            android:layout_alignStart="@+id/userInfo" />
 
 
     </RelativeLayout>

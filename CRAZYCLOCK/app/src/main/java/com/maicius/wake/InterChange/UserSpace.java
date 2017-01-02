@@ -120,7 +120,7 @@ public class UserSpace extends NetEventActivity {
         ImageView image_phoneTime =(ImageView) findViewById(R.id.phoneIcon);
         ImageView image_exit_main = (ImageView) findViewById(R.id.exit_main);
         ImageView image_about_us = (ImageView) findViewById(R.id.aboutUs);
-
+        ImageView image_rank = (ImageView) findViewById(R.id.rank_image);
         image_phoneTime.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(UserSpace.this, ScreenOffList.class));
@@ -139,6 +139,12 @@ public class UserSpace extends NetEventActivity {
         image_about_us.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(UserSpace.this, AboutUs.class));
+            }
+        });
+        image_rank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserSpace.this, rank.class));
             }
         });
         image_getUpTime.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +181,7 @@ public class UserSpace extends NetEventActivity {
         image_sleepHistory.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent();
-                intent.setClass(UserSpace.this, GetUpHistory.class);
+                intent.setClass(UserSpace.this, SleepHistory.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("username", MainActivity.s_userName);
                 intent.putExtras(bundle);
