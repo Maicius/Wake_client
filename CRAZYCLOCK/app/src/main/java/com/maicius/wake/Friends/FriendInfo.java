@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maicius.wake.InterChange.GetUpHistory;
+import com.maicius.wake.InterChange.SleepHistory;
 import com.maicius.wake.alarmClock.MainActivity;
 import com.maicius.wake.alarmClock.R;
 import com.maicius.wake.web.WebService;
@@ -93,7 +94,16 @@ public class FriendInfo extends Activity {
                     bundle.putString("username", phoneNum);
                     intent.putExtras(bundle);
                     startActivity(intent);
-                } else if (i == 2) {  //设置好友起床提示语
+                }
+                else if(i ==1){
+                    Intent intent = new Intent();
+                    intent.setClass(FriendInfo.this, SleepHistory.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", phoneNum);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                else if (i == 2) {  //设置好友起床提示语
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(FriendInfo.this);
                     final EditText editText = new EditText(FriendInfo.this);
                     alertDialog.setTitle("输入提示语");

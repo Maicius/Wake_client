@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,10 +46,13 @@ public class SleepHistory extends Activity {
     private static Handler handler = new Handler();
     private ProgressDialog dialog;
     private ListView m_list;
+    private String username;
     private List<Map<String, Object>> listItems;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sleep_history);
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         dialog = new ProgressDialog(this);
         dialog.setTitle("提示");
         dialog.setMessage("正在获取历史信息，请稍后...");
@@ -61,7 +65,7 @@ public class SleepHistory extends Activity {
     public class MyThread implements Runnable {
         @Override
         public void run() {
-            returnInfo = WebService.executeHttpGet(MainActivity.s_userName, WebService.State.GetSleepTime);
+            returnInfo = WebService.executeHttpGet(username, WebService.State.GetSleepTime);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
