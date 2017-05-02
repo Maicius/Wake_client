@@ -34,8 +34,8 @@ public class WebService extends Activity{
         GetGetUpTip
     }
     // IP地址
-    private static String IP = "116.62.41.211:8080";
-    //private static String IP = "192.168.191.1:8080";
+    //private static String IP = "116.62.41.211:8080";
+    private static String IP = "192.168.1.112:8080";
     //private static String IP = "192.168.1.135:8080";     //服务器程序基址
     //private static String IP = "192.168.191.1:8080";             //本地测试地址
     //private static String base = "http://" + IP +"/HelloWeb";   //本地程序基址
@@ -170,7 +170,7 @@ public class WebService extends Activity{
         }
         //为了重用，如果是查找好友，第一个参数是指输入的昵称，第二个参数是指输入的用户名即电话
         try {
-            path += "?userName=" + URLEncoder.encode(userName,"UTF-8") + "&friendName=" + URLEncoder.encode(friendName, "UTF-8");
+            path += "?username=" + URLEncoder.encode(userName,"UTF-8") + "&friendName=" + URLEncoder.encode(friendName, "UTF-8");
         }catch(UnsupportedEncodingException e){
             e.printStackTrace();
         }
