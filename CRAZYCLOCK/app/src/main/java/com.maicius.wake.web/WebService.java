@@ -34,8 +34,8 @@ public class WebService extends Activity{
         GetGetUpTip
     }
     // IP地址
-    //private static String IP = "116.62.41.211:8080";
-    private static String IP = "192.168.1.112:8080";
+    private static String IP = "116.62.41.211:8080/wake";
+    //private static String IP = "192.168.1.112:8080";
     //private static String IP = "192.168.1.135:8080";     //服务器程序基址
     //private static String IP = "192.168.191.1:8080";             //本地测试地址
     //private static String base = "http://" + IP +"/HelloWeb";   //本地程序基址
