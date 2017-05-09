@@ -45,7 +45,7 @@ public class GetUpHistory extends Activity {
     private ProgressDialog m_proDialog;
     private ArrayList<HashMap<String, Object>> m_listViewStrings = new ArrayList<HashMap<String, Object>>();
     private ArrayList<String> m_spinnerListStrings = new ArrayList<String>();
-    private String m_responseInfo;
+    private String m_responseInfo = "";
     private String m_username;
     private IChart m_timeChart = new MLineChart();
     private IChart m_barChart = new MBarChart();
@@ -218,6 +218,8 @@ public class GetUpHistory extends Activity {
     }
 
     private void mUpdateList() {
+        if (m_responseInfo.equals(""))
+            return;
         times.clear();
         m_listViewStrings.clear();
         StringTokenizer st = new StringTokenizer(m_responseInfo, "#");
@@ -287,6 +289,7 @@ public class GetUpHistory extends Activity {
         @Override
         public void run() {
             m_responseInfo = WebService.executeHttpGet(m_username, WebService.State.GetTimeList);
+            // m_responseInfo = "2017-4-1 10:00:12#2017-4-4 11:00:23#2017-4-4 9:00:43#2017-4-5 7:00:56#2017-4-6 6:00:35#2017-4-7 8:30:45#2017-4-8 7:05:23#2017-4-20 10:00:09#2017-4-27 10:30:00#";
             Log.v("ikuto", "login:" + m_responseInfo);
             m_handler.post(new Runnable() {
                 @Override
