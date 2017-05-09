@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,38 +13,119 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
         android:weightSum="1"
         android:layout_alignParentBottom="true">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="380dp"
-            android:id="@+id/timeList"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.15" />
-
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:layout_weight="1.15"
-            android:weightSum="1">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/curve"
-                android:src="@drawable/curve" />
+            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:layout_width="match_parent">
 
             <TextView
-                android:text="  曲线图"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:textSize="18dp"
-                android:id="@+id/textView10" />
+                android:text="筛选条件"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/timeSpinner" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.8"
+            android:id="@+id/timeList"
+            android:layout_gravity="center_horizontal"
+            android:background="#88888888"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:id="@+id/curve"
+                    android:src="@drawable/curve" />
+
+                <TextView
+                    android:text="  折线图"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:id="@+id/textView10" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:id="@+id/curve_1"
+                    android:src="@drawable/curve" />
+
+                <TextView
+                    android:text="   饼图"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:id="@+id/textView11" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:id="@+id/curve_2"
+                    android:src="@drawable/curve" />
+
+                <TextView
+                    android:text="    条形图"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:id="@+id/textView12" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:weightSum="1">
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
+
 </RelativeLayout>
