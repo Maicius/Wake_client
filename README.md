@@ -1,5 +1,5 @@
 # Wake_client
-![image]()
+![image](https://github.com/Maicius/Wake_client/blob/master/image/welcome.jpg)
 >An Internet comunity based on alarm clock  
 >It provides quantitative data reference for the user's sleep
 
@@ -14,6 +14,6 @@
 
 # Some screenshots of APP
 ![image](https://github.com/Maicius/Wake_client/blob/master/image/screenshots-1.png)
-![image](https://github.com/Maicius/Wake_client/blob/master/image/screenshot-2.png)
+![image](https://github.com/Maicius/Wake_client/blob/master/image/scrrenshot-2.png)
 ![image](https://github.com/Maicius/Wake_client/blob/master/image/screenshot-3.png)
  
